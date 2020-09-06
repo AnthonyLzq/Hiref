@@ -24,7 +24,7 @@ class Tasks {
 
   public process (
     type: string
-  ): Promise<ITasks[]> | Promise<ITasks> | undefined {
+  ): Promise<ITasks[]> | Promise<ITasks | null> | undefined {
     switch (type) {
       case 'deleteOne':
         return this._deleteOne()
@@ -39,7 +39,7 @@ class Tasks {
     }
   }
 
-  private async _deleteOne (): Promise<ITasks> {
+  private async _deleteOne (): Promise<ITasks | null> {
     const { id } = this._args as DtoTasks
     try {
       const deletedTasks = await TasksModel.findOneAndDelete({ id })
@@ -109,7 +109,7 @@ class Tasks {
     }
   }
 
-  private async _update (): Promise<ITasks> {
+  private async _update (): Promise<ITasks | null> {
     const {
       id,
       limitDate,

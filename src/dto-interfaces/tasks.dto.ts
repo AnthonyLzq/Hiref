@@ -4,7 +4,7 @@ export interface DtoTasks {
   idProject?  : string,
   limitDate?  : Date,
   name?       : string,
-  responsible?: [string],
+  responsible?: string[],
   status?     : string,
-  subTasks?   : [string]
+  subTasks?   : string[]
 }

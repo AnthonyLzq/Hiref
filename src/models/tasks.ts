@@ -4,10 +4,10 @@ interface ITasks extends Document {
   idCompany        : string,
   limitDate        : Date,
   name             : string,
-  responsible      : [string],
+  responsible      : string[],
   responsibleNumber: number,
   status           : string,
-  subTasks?        : [string]
+  subTasks?        : string[]
 }
 
 const Tasks = new Schema(
