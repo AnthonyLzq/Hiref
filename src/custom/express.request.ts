@@ -1,5 +1,6 @@
 import { Request } from 'express'
-import { DtoUsers } from '../dto-interfaces/users.dto'
+import { DtoTasks } from '../dto-interfaces/tasks.dto'
+import { DtoProjects } from '../dto-interfaces/projects.dto'
 
 /*
  * With this piece of code we ca personalize the attributes of the request,
@@ -7,7 +8,12 @@ import { DtoUsers } from '../dto-interfaces/users.dto'
  */
 
 interface CustomRequest extends Request {
-  args?: DtoUsers
+  body: {
+    args?: DtoTasks | DtoProjects
+  },
+  query: {
+    status?: string
+  }
 }
 
 export { CustomRequest as Request }

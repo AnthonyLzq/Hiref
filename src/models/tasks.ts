@@ -40,7 +40,7 @@ const Tasks = new Schema(
   },
   {
     timestamps: {
-      createdAt: false,
+      createdAt: true,
       updatedAt: true
     }
   }

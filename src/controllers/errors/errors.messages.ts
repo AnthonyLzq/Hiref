@@ -1,5 +1,21 @@
 /* eslint-disable no-shadow */
 
+enum ErrorMessagesForProjectsController {
+  missingCategories = 'Categories must be provided.',
+  missingDescription = 'Description must be provided',
+  missingIdCompany = 'Id Company must be provided.',
+  missingLimitDate = 'Limit date must be provided.',
+  missingName = 'Name must be provided.',
+  missingRoles = 'Roles must be provided',
+  missingSubCategories = 'Sub Roles must be provided.',
+  problemGettingAll = 'There was a problem getting all the projects.',
+  problemGettingAllByCompany = 'There was a problem getting all the projects from the requested company.',
+  problemGettingAllByStatus = 'There was a problem getting all the projects from the requested company int he requested status.',
+  problemStoringProjects = 'There was a problem trying to store the project.',
+  problemUpdatingProjects = 'There was a problem trying to update the project.',
+  statusNotAllowed = 'That status is not allowed.'
+}
+
 enum ErrorMessagesForTasksController {
   missingIdCompany = 'Id company must be provided.',
   missingIdProject = 'Id project must be provided.',
@@ -14,4 +30,4 @@ enum ErrorMessagesForTasksController {
   problemUpdatingTasks = 'There was a problem trying to update the task.'
 }
 
-export { ErrorMessagesForTasksController }
+export { ErrorMessagesForProjectsController, ErrorMessagesForTasksController }

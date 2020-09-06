@@ -1,5 +1,15 @@
 # Hiref
 
+## Version 0.3.0
+
+- Implemented:
+  - Projects endpoint.
+  - `dist` folder.
+- Removed:
+  - Users endpoint.
+- Fixed:
+  - Dockerfile.
+
 ## Version 0.2.2
 
 - Implemented:
