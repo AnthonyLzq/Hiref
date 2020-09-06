@@ -1,5 +1,14 @@
 # Hiref
 
+## Version 0.2.2
+
+- Implemented:
+  - Now the tasks has its own time createdAt field.
+- Fixed:
+  - Throw errors when an update is performed without all the requested params.
+  - New data type for the sub tasks.
+  - Now, errors for controllers have their own file.
+
 ## Version 0.2.1
 
 - Fixed:
@@ -12,7 +21,6 @@
   - Not tested endpoint for tasks.
 - Pending:
   - Update [documentation](https://github.com/AnthonyLzq/Hiref#readme).
-
 
 ## Version 0.1.0
 

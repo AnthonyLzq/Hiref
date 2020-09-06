@@ -1,19 +1,6 @@
 import { DtoTasks } from '../dto-interfaces/tasks.dto'
 import { ITasks, TasksModel } from '../models/tasks'
-
-// eslint-disable-next-line no-shadow
-enum EFT { // Error for tasks
-  missingIdCompany = 'Id company is missing.',
-  missingIdProject = 'Id project is missing.',
-  missingLimitDate = 'Limit date must be provided.',
-  missingName = 'Name must be provided.',
-  missingResponsible = 'Responsible must be provided.',
-  missingStatus = 'Status must be provided.',
-  problemDeleting = 'There was a problem deleting the tasks.',
-  problemGettingAll = 'There was a problem getting all the tasks.',
-  problemStoringTasks = 'There was a problem trying to store the task.',
-  problemUpdatingTasks = 'There was a problem trying to update the task.'
-}
+import { ErrorMessagesForTasksController as EFT } from './errors/errors.messages'
 
 class Tasks {
   private _args: DtoTasks | null
@@ -118,6 +105,12 @@ class Tasks {
       status,
       subTasks
     } = this._args as DtoTasks
+
+    if (!limitDate) throw new Error(EFT.missingLimitDate)
+    else if (!name) throw new Error(EFT.missingName)
+    else if (!responsible) throw new Error(EFT.missingResponsible)
+    else if (!status) throw new Error(EFT.missingStatus)
+    else if (!subTasks) throw new Error(EFT.missingSubTasks)
 
     try {
       const result = await TasksModel.findByIdAndUpdate(

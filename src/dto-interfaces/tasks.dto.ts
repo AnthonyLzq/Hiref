@@ -6,5 +6,5 @@ export interface DtoTasks {
   name?       : string,
   responsible?: string[],
   status?     : string,
-  subTasks?   : string[]
+  subTasks?   : string[] | []
 }
