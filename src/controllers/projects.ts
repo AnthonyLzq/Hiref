@@ -88,10 +88,10 @@ class Projects {
         categories,
         description,
         idCompany,
-        limitDate,
+        limitDate: new Date(limitDate),
         name,
         roles,
-        status: 'published'
+        status   : 'published'
       })
       const result = await newProject.save()
 

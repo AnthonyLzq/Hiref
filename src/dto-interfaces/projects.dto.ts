@@ -11,7 +11,7 @@ interface DtoProjects {
   idCompany?    : string,
   limitDate?    : Date,
   name?         : string,
-  roles?        : IRoles,
+  roles?        : IRoles[],
   status?       : string,
   subCategories?: string[]
 }

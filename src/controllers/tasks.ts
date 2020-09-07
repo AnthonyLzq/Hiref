@@ -72,7 +72,7 @@ class Tasks {
       const newTask = new TasksModel({
         idCompany,
         idProject,
-        limitDate,
+        limitDate: new Date(limitDate),
         name,
         responsible,
         status,
@@ -116,7 +116,7 @@ class Tasks {
       const result = await TasksModel.findByIdAndUpdate(
         id,
         {
-          limitDate,
+          limitDate: new Date(limitDate),
           name,
           responsible,
           status,

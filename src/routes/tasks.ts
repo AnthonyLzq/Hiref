@@ -7,7 +7,7 @@ import { DtoTasks } from '../dto-interfaces/tasks.dto'
 
 const Tasks = Router()
 
-Tasks.route('/tasks/:idCompany/:idProject')
+Tasks.route('/tasks/:idCompany/:idProject/')
   .get(async (req: Request, res: Response): Promise<void> => {
     const { params: { idCompany, idProject } } = req
     const tc = new TasksC({ idCompany, idProject } as DtoTasks)
@@ -40,12 +40,14 @@ Tasks.route('/tasks/:idCompany/:idProject')
     }
   })
 
-Tasks.route('/tasks/:idTask')
+Tasks.route('/tasks/:idCompany/:idProject/:idTask/')
   .patch(async (req: Request, res: Response): Promise<void> => {
-    const { body: { args }, params: { idTask } }= req
+    const { body: { args }, params: { idCompany, idProject, idTask } }= req
     const tc = new TasksC({
       ...args as DtoTasks,
-      id: idTask as string
+      id: idTask,
+      idCompany,
+      idProject
     } as DtoTasks)
 
     try {
@@ -56,6 +58,8 @@ Tasks.route('/tasks/:idTask')
       response(true, { message: error.message }, res, 500)
     }
   })
+
+Tasks.route('/task/:idTask/')
   .delete(async (req: Request, res: Response): Promise<void> => {
     const { params: { idTask } } = req
     const tc = new TasksC({ id: idTask as string })

@@ -1,5 +1,15 @@
 # Hiref
 
+## Version 0.4.0
+
+- Implemented:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+  - Some code refactoring.
+- Pending:
+  - Socket connection.
+  - Notifications.
+  - Secure request (Bearer token).
+
 ## Version 0.3.0
 
 - Implemented:
