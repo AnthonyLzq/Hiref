@@ -1,9 +1,10 @@
 import { Application, Router } from 'express'
 import { Home } from '../routes/home'
+import { Jobs } from '../routes/jobs'
 import { Projects } from '../routes/projects'
 import { Tasks } from '../routes/tasks'
 
-const routers = [ Projects, Tasks ]
+const routers = [ Jobs, Projects, Tasks ]
 
 const applyRoutes = (app: Application): void => {
   app.use('/', Home)

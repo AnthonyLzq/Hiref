@@ -1,11 +1,13 @@
 import express from 'express'
-import mongoose from 'mongoose'
 import morgan from 'morgan'
 import { applyRoutes } from './routes'
+import { mongoConnection } from '../database/mongo'
+import { mysqlConnection } from '../database/mysql'
 
 class Server {
   public app: express.Application
-  private _connection: mongoose.Connection | undefined
+  private _mongoConnection: (() => Promise<void>) | undefined
+  private _mysqlConnection: (() => Promise<void>) | undefined
 
   constructor () {
     this.app = express()
@@ -35,48 +37,23 @@ class Server {
   }
 
   private async _mongo (): Promise<void> {
-    this._connection = mongoose.connection
-    const connection = {
-      keepAlive         : true,
-      useCreateIndex    : true,
-      useFindAndModify  : false,
-      useNewUrlParser   : true,
-      useUnifiedTopology: true
-    }
-    this._connection.on('connected', () => {
-      console.log('Mongo connection established.')
-    })
-    this._connection.on('reconnected', () => {
-      console.log('Mongo connection reestablished')
-    })
-    this._connection.on('disconnected', () => {
-      console.log('Mongo connection disconnected')
-      console.log('Trying to reconnected to Mongo...')
-      setTimeout(() => {
-        mongoose.connect(process.env.MONGO_URI as string, {
-          ...connection,
-          connectTimeoutMS: 3000,
-          socketTimeoutMS : 3000
-        })
-      }, 3000)
-    })
-    this._connection.on('close', () => {
-      console.log('Mongo connection closed')
-    })
-    this._connection.on('error', (error: Error) => {
-      console.log('Mongo connection error:')
-      console.error(error)
-    })
-    await mongoose.connect(process.env.MONGO_URI as string, connection)
+    this._mongoConnection = mongoConnection
+    this._mongoConnection()
+  }
+
+  private async _mysql (): Promise<void> {
+    this._mysqlConnection = mysqlConnection
+    this._mysqlConnection()
   }
 
   public start (): void {
     this.app.listen(this.app.get('port'), () =>
-      console.log(`Server running at port ${this.app.get('port')}`)
+      console.log(`Server running at port ${this.app.get('port')}.`)
     )
 
     try {
       this._mongo()
+      this._mysql()
     } catch (error) {
       console.error(error)
     }

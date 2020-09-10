@@ -35,7 +35,7 @@ Mongo connection established.
 
 ## Usage
 
-There are seven endpoints implemented:
+There are eight endpoints implemented:
 
 1. Home: `/`, it has a get method. It is only decorative.
 2. Projects: `/projects/`, it has a get method. This method will return you all the projects in the database.
@@ -122,6 +122,8 @@ There are seven endpoints implemented:
    Sub tasks field is optional, in case there isn't any sub task, you should send an empty array.
 
 7. Task by id: `/task/:idTask`, it has a delete method, if you send it, then you will delete the task.
+
+8. Get all jobs: `/jobs/`, it has a get method. This method will return you all the jobs in the database.
 
 ### Notes
 

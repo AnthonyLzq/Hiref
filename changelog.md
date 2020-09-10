@@ -1,5 +1,13 @@
 # Hiref
 
+## Version 0.5.0
+
+- Implemented:
+  - Mysql connection.
+  - Jobs endpoint.
+- Updated:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+
 ## Version 0.4.1
 
 - Fixed:

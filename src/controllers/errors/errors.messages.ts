@@ -1,5 +1,9 @@
 /* eslint-disable no-shadow */
 
+enum ErrorMessagesForJobsController {
+  problemGettingAll = 'There was a problem getting all the jobs.'
+}
+
 enum ErrorMessagesForProjectsController {
   invalidDate = 'Invalid Date',
   missingCategories = 'Categories must be provided.',
@@ -32,4 +36,8 @@ enum ErrorMessagesForTasksController {
   problemUpdatingTasks = 'There was a problem trying to update the task.'
 }
 
-export { ErrorMessagesForProjectsController, ErrorMessagesForTasksController }
+export {
+  ErrorMessagesForJobsController,
+  ErrorMessagesForProjectsController,
+  ErrorMessagesForTasksController
+}

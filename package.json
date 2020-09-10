@@ -1,6 +1,6 @@
 {
   "name": "hiref",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "main": "src/index.ts",
   "description": "A platform to hire people",
   "scripts": {
@@ -8,14 +8,18 @@
     "build": "webpack --mode production",
     "lint": "eslint src/* --ext .ts",
     "service": "nodemon",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "start:dev": "node -r dotenv/config dist/index.js",
+    "test": "ts-node -r dotenv/config ./src/database/mysql.ts"
   },
   "author": "AnthonyLzq <sluzquinosa@uni.pe>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
+    "knex": "^0.21.5",
     "mongoose": "^5.10.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.8",
