@@ -79,6 +79,7 @@ class Projects {
     else if (!description) throw new Error(EFP.missingDescription)
     else if (!idCompany) throw new Error(EFP.missingIdCompany)
     else if (!limitDate) throw new Error(EFP.missingLimitDate)
+    else if (new Date(limitDate).toString() === 'Invalid Date') throw new Error(EFP.invalidDate)
     else if (!name) throw new Error(EFP.missingName)
     else if (!roles) throw new Error(EFP.missingRoles)
     else if (!subCategories) throw new Error(EFP.missingSubCategories)
@@ -102,6 +103,7 @@ class Projects {
         error.message === EFP.missingDescription ||
         error.message === EFP.missingIdCompany ||
         error.message === EFP.missingLimitDate ||
+        error.message === EFP.invalidDate ||
         error.message === EFP.missingName ||
         error.message === EFP.missingRoles
       )
@@ -128,6 +130,7 @@ class Projects {
     if (!categories) throw new Error(EFP.missingCategories)
     else if (!description) throw new Error(EFP.missingDescription)
     else if (!limitDate) throw new Error(EFP.missingLimitDate)
+    else if (new Date(limitDate).toString() === 'Invalid Date') throw new Error(EFP.invalidDate)
     else if (!name) throw new Error(EFP.missingName)
     else if (!roles) throw new Error(EFP.missingRoles)
     else if (!subCategories) throw new Error(EFP.missingSubCategories)
@@ -157,6 +160,7 @@ class Projects {
         error.message === EFP.missingCategories ||
         error.message === EFP.missingDescription ||
         error.message === EFP.missingLimitDate ||
+        error.message === EFP.invalidDate ||
         error.message === EFP.missingName ||
         error.message === EFP.missingRoles ||
         error.message === EFP.missingSubCategories ||

@@ -61,7 +61,8 @@ There are seven endpoints implemented:
              "quantity": 30,
              "remuneration": 950
            }
-         ]
+         ],
+         "subCategories": ["category_1", "category_2"],
        }
      }
      ```

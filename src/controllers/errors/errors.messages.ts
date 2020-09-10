@@ -1,13 +1,14 @@
 /* eslint-disable no-shadow */
 
 enum ErrorMessagesForProjectsController {
+  invalidDate = 'Invalid Date',
   missingCategories = 'Categories must be provided.',
   missingDescription = 'Description must be provided',
   missingIdCompany = 'Id Company must be provided.',
   missingLimitDate = 'Limit date must be provided.',
   missingName = 'Name must be provided.',
   missingRoles = 'Roles must be provided',
-  missingSubCategories = 'Sub Roles must be provided.',
+  missingSubCategories = 'Sub categories must be provided.',
   problemGettingAll = 'There was a problem getting all the projects.',
   problemGettingAllByCompany = 'There was a problem getting all the projects from the requested company.',
   problemGettingAllByStatus = 'There was a problem getting all the projects from the requested company int he requested status.',
@@ -17,6 +18,7 @@ enum ErrorMessagesForProjectsController {
 }
 
 enum ErrorMessagesForTasksController {
+  invalidDate = 'Invalid Date',
   missingIdCompany = 'Id company must be provided.',
   missingIdProject = 'Id project must be provided.',
   missingLimitDate = 'Limit date must be provided.',

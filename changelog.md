@@ -1,5 +1,11 @@
 # Hiref
 
+## Version 0.4.1
+
+- Fixed:
+  - Errors messages.
+  - Payload to store a project.
+
 ## Version 0.4.0
 
 - Implemented:

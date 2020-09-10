@@ -64,6 +64,7 @@ class Tasks {
     if (!idCompany) throw new Error(EFT.missingIdCompany)
     else if (!idProject) throw new Error(EFT.missingIdProject)
     else if (!limitDate) throw new Error(EFT.missingLimitDate)
+    else if (new Date(limitDate).toString() === 'Invalid Date') throw new Error(EFT.invalidDate)
     else if (!name) throw new Error(EFT.missingName)
     else if (!responsible) throw new Error(EFT.missingResponsible)
     else if (!status) throw new Error(EFT.missingStatus)
@@ -83,7 +84,10 @@ class Tasks {
       return result
     } catch (error) {
       if (
+        error.message === EFT.missingIdCompany ||
+        error.message === EFT.missingIdProject ||
         error.message === EFT.missingLimitDate ||
+        error.message === EFT.invalidDate ||
         error.message === EFT.missingName ||
         error.message === EFT.missingResponsible ||
         error.message === EFT.missingStatus
@@ -107,6 +111,7 @@ class Tasks {
     } = this._args as DtoTasks
 
     if (!limitDate) throw new Error(EFT.missingLimitDate)
+    else if (new Date(limitDate).toString() === 'Invalid Date') throw new Error(EFT.invalidDate)
     else if (!name) throw new Error(EFT.missingName)
     else if (!responsible) throw new Error(EFT.missingResponsible)
     else if (!status) throw new Error(EFT.missingStatus)
@@ -129,8 +134,19 @@ class Tasks {
 
       return result
     } catch (error) {
-      console.error(error)
-      throw new Error(EFT.problemUpdatingTasks)
+      if (
+        error.message === EFT.missingLimitDate ||
+        error.message === EFT.invalidDate ||
+        error.message === EFT.missingName ||
+        error.message === EFT.missingResponsible ||
+        error.message === EFT.missingStatus ||
+        error.message === EFT.missingSubTasks
+      )
+        throw error
+      else {
+        console.error(error)
+        throw new Error(EFT.problemStoringTasks)
+      }
     }
   }
 }
