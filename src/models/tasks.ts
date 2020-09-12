@@ -1,28 +1,21 @@
-import { Document, model, Schema } from 'mongoose'
+import { model, Schema } from 'mongoose'
+import { ICommonDataForProjectsTasksAndJobOffers } from './utils/commonDataForProjectsTasksAndJobOffers'
+import { extendSchema } from './utils/extendTaskSchema'
 
-interface ITasks extends Document {
-  idCompany        : string,
-  limitDate        : Date,
-  name             : string,
-  responsible      : string[],
-  responsibleNumber: number,
-  status           : string,
+interface ITasks extends ICommonDataForProjectsTasksAndJobOffers {
+  idProject        : Schema.Types.ObjectId
+  responsible      : string[]
+  responsibleNumber: number
+  status           : string
   subTasks?        : string[]
 }
 
-const Tasks = new Schema(
+const TasksSchemaToExtend = new Schema(
   {
-    idCompany: {
+    idProject: {
+      ref     : 'projects',
       required: true,
-      type    : String
-    },
-    limitDate: {
-      required: true,
-      type    : Date
-    },
-    name: {
-      required: true,
-      type    : String
+      type    : Schema.Types.ObjectId
     },
     responsible: {
       required: true,
@@ -32,19 +25,11 @@ const Tasks = new Schema(
       required: true,
       type    : Number
     },
-    status: {
-      required: true,
-      type    : String
-    },
     subTasks: [String]
-  },
-  {
-    timestamps: {
-      createdAt: true,
-      updatedAt: true
-    }
   }
 )
+
+const Tasks = extendSchema(TasksSchemaToExtend)
 
 const TasksModel = model<ITasks>('tasks', Tasks)
 

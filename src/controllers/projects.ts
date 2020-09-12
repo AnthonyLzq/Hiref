@@ -1,6 +1,9 @@
 import { DtoProjects } from '../dto-interfaces/projects.dto'
 import { IProjects, ProjectsModel, STATUS_NAMES } from '../models/projects'
-import { ErrorMessagesForProjectsController as EFP } from './errors/errors.messages'
+import {
+  ErrorMessagesForProjectsController as EFP,
+  GeneralErrorMessages as GEM
+} from './errors/errors.messages'
 
 class Projects {
   private _args: DtoProjects | null
@@ -13,8 +16,6 @@ class Projects {
     type: string
   ): Promise<IProjects[]> | Promise<IProjects | null> | undefined {
     switch (type) {
-      case 'getAll':
-        return this._getAll()
       case 'getAllByCompany':
         return this._getAllByCompany()
       case 'getAllByStatus':
@@ -23,20 +24,10 @@ class Projects {
         return this._store()
       case 'update':
         return this._update()
+      case 'updateStatus':
+        return this._updateStatus()
       default:
         return undefined
-    }
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  private async _getAll (): Promise<IProjects[]> {
-    try {
-      const projects = await ProjectsModel.find({})
-
-      return projects
-    } catch (error) {
-      console.error(error)
-      throw new Error(EFP.problemGettingAll)
     }
   }
 
@@ -66,88 +57,83 @@ class Projects {
 
   private async _store (): Promise<IProjects | null> {
     const {
-      categories,
+      code,
+      deadline,
       description,
       idCompany,
-      limitDate,
-      name,
-      roles,
-      subCategories
+      supervisor
     } = this._args as DtoProjects
 
-    if (!categories) throw new Error(EFP.missingCategories)
-    else if (!description) throw new Error(EFP.missingDescription)
-    else if (!idCompany) throw new Error(EFP.missingIdCompany)
-    else if (!limitDate) throw new Error(EFP.missingLimitDate)
-    else if (new Date(limitDate).toString() === 'Invalid Date') throw new Error(EFP.invalidDate)
-    else if (!name) throw new Error(EFP.missingName)
-    else if (!roles) throw new Error(EFP.missingRoles)
-    else if (!subCategories) throw new Error(EFP.missingSubCategories)
-
     try {
+      if (!code) throw new Error(GEM.missingCode)
+      else if (!deadline) throw new Error(GEM.missingDeadline)
+      else if (new Date(deadline).toString() === 'Invalid Date')
+        throw new Error(GEM.invalidDate)
+      else if (!idCompany) throw new Error(GEM.missingIdCompany)
+      else if (!description) throw new Error(GEM.missingDescription)
+      else if (!supervisor) throw new Error(EFP.missingSupervisor)
+
       const newProject = new ProjectsModel({
-        categories,
+        code,
+        deadline: new Date(deadline),
         description,
         idCompany,
-        limitDate: new Date(limitDate),
-        name,
-        roles,
-        status   : 'published'
+        status  : 'active',
+        supervisor
       })
       const result = await newProject.save()
 
       return result
     } catch (error) {
       if (
-        error.message === EFP.missingCategories ||
-        error.message === EFP.missingDescription ||
-        error.message === EFP.missingIdCompany ||
-        error.message === EFP.missingLimitDate ||
-        error.message === EFP.invalidDate ||
-        error.message === EFP.missingName ||
-        error.message === EFP.missingRoles
+        error.message === GEM.missingCode ||
+        error.message === GEM.missingDeadline ||
+        error.message === GEM.invalidDate ||
+        error.message === GEM.missingIdCompany ||
+        error.message === GEM.missingDescription ||
+        error.message === EFP.missingSupervisor
       )
         throw error
       else {
         console.error(error)
-        throw error(EFP.problemStoringProjects)
+        throw new Error(EFP.problemStoringProjects)
       }
     }
   }
 
   private async _update (): Promise<IProjects | null> {
     const {
-      categories,
+      code,
+      deadline,
       description,
       id,
-      limitDate,
-      name,
-      roles,
+      idCompany,
       status,
-      subCategories
+      supervisor
     } = this._args as DtoProjects
 
-    if (!categories) throw new Error(EFP.missingCategories)
-    else if (!description) throw new Error(EFP.missingDescription)
-    else if (!limitDate) throw new Error(EFP.missingLimitDate)
-    else if (new Date(limitDate).toString() === 'Invalid Date') throw new Error(EFP.invalidDate)
-    else if (!name) throw new Error(EFP.missingName)
-    else if (!roles) throw new Error(EFP.missingRoles)
-    else if (!subCategories) throw new Error(EFP.missingSubCategories)
-    else if (!STATUS_NAMES.includes(status as string))
-      throw new Error(EFP.statusNotAllowed)
-
     try {
+      if (!code) throw new Error(GEM.missingCode)
+      else if (!deadline) throw new Error(GEM.missingDeadline)
+      else if (new Date(deadline).toString() === 'Invalid Date')
+        throw new Error(GEM.invalidDate)
+      else if (!description) throw new Error(GEM.missingDescription)
+      else if (!idCompany) throw new Error(GEM.missingIdCompany)
+      else if (!supervisor) throw new Error(EFP.missingSupervisor)
+      else if (!status) throw new Error(GEM.missingStatus)
+      else if (!STATUS_NAMES.includes(status as string))
+        throw new Error(GEM.statusNotAllowed)
+
       const result = await ProjectsModel.findByIdAndUpdate(
-        id,
+        id as string,
         {
-          categories,
+          code,
+          deadline: new Date(deadline),
           description,
-          limitDate,
-          name,
-          roles,
+          id,
+          idCompany,
           status,
-          subCategories
+          supervisor
         },
         {
           new: true
@@ -157,20 +143,39 @@ class Projects {
       return result
     } catch (error) {
       if (
-        error.message === EFP.missingCategories ||
-        error.message === EFP.missingDescription ||
-        error.message === EFP.missingLimitDate ||
-        error.message === EFP.invalidDate ||
-        error.message === EFP.missingName ||
-        error.message === EFP.missingRoles ||
-        error.message === EFP.missingSubCategories ||
-        error.message === EFP.statusNotAllowed
+        error.message === GEM.missingCode ||
+        error.message === GEM.missingDeadline ||
+        error.message === GEM.invalidDate ||
+        error.message === GEM.missingDescription ||
+        error.message === GEM.missingIdCompany ||
+        error.message === EFP.missingSupervisor ||
+        error.message === GEM.statusNotAllowed
       )
         throw error
       else {
         console.error(error)
         throw new Error(EFP.problemUpdatingProjects)
       }
+    }
+  }
+
+  private async _updateStatus (): Promise<IProjects | null> {
+    const { id, status } = this._args as DtoProjects
+
+    try {
+      if (!STATUS_NAMES.includes(status as string))
+        throw new Error(GEM.statusNotAllowed)
+
+      const result = await ProjectsModel.findByIdAndUpdate(
+        id as string,
+        { status: status as string },
+        { new: true }
+      )
+
+      return result
+    } catch (error) {
+      console.error(error)
+      throw new Error(GEM.problemUpdatingStatus)
     }
   }
 }

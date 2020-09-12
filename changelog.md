@@ -1,5 +1,15 @@
 # Hiref
 
+## Version 0.6.0
+
+- Implemented:
+  - Job offers endpoint.
+  - Code refactoring, job offers are now created from a project.
+- Updated:
+  - Error messages.
+- Pending:
+  - To update [documentation](https://github.com/AnthonyLzq/Hiref#readme).
+
 ## Version 0.5.0
 
 - Implemented:

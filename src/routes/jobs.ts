@@ -12,7 +12,6 @@ Jobs.route('/jobs')
       const result = await jc.process('getAll')
       response(false, { result }, res, 200)
     } catch (error) {
-      console.error(error)
       response(true, { message: error.message }, res, 500)
     }
   })

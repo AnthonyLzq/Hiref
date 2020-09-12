@@ -1,77 +1,44 @@
-import { Document, model, Schema } from 'mongoose'
-import { IRoles } from '../dto-interfaces/projects.dto'
+import { model, Schema } from 'mongoose'
+import { ICommonDataForProjectsTasksAndJobOffers } from './utils/commonDataForProjectsTasksAndJobOffers'
+import { ISupervisor } from '../dto-interfaces/projects.dto'
+import { extendSchema } from './utils/extendProjectsAndJobOffersSchema'
 
-const STATUS_NAMES = ['published', 'active', 'completed', 'canceled']
+const STATUS_NAMES = ['active', 'completed', 'canceled']
 
-interface IProjects extends Document {
-  categories   : string[],
-  description  : string,
-  idCompany    : string,
-  limitDate    : Date,
-  name         : string,
-  roles        : IRoles[],
-  status       : string,
-  subCategories: string[]
+interface IProjects extends ICommonDataForProjectsTasksAndJobOffers {
+  idCompany    : string
+  supervisor   : ISupervisor[]
 }
 
-const Roles = new Schema({
-  name: {
+const SupervisorSchema = new Schema({
+  dni: {
     required: true,
     type    : String
   },
-  quantity: {
+  lastNames: {
     required: true,
-    type    : Number
+    type    : String
   },
-  remuneration: {
+  names: {
     required: true,
-    type    : Number
+    type    : String
   }
 })
 
-const Projects = new Schema(
+const ProjectsToExtend = new Schema(
   {
-    categories: {
-      required: true,
-      type    : [String]
-    },
-    description: {
-      required: true,
-      type    : String
-    },
     idCompany: {
       required: true,
       type    : String
     },
-    limitDate: {
+    supervisor: {
       required: true,
-      type    : Date
-    },
-    name: {
-      required: true,
-      type    : String
-    },
-    roles: {
-      required: true,
-      type    : [Roles]
-    },
-    status: {
-      enum    : STATUS_NAMES,
-      required: true,
-      type    : String
-    },
-    subCategories: {
-      required: true,
-      type    : String
-    }
-  },
-  {
-    timestamps: {
-      createdAt: true,
-      updatedAt: true
+      type    : [SupervisorSchema]
     }
   }
 )
+
+const Projects = extendSchema(ProjectsToExtend, STATUS_NAMES)
 
 const ProjectsModel = model<IProjects>('projects', Projects)
 

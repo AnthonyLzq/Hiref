@@ -1,10 +1,11 @@
+import { IInformation } from './utils/informationInterface'
+
 export interface DtoTasks {
-  id?         : string,
-  idCompany?  : string,
-  idProject?  : string,
-  limitDate?  : Date,
-  name?       : string,
-  responsible?: string[],
-  status?     : string,
+  deadline?   : Date
+  description?: IInformation
+  id?         : string
+  idProject?  : string
+  responsible?: string[]
+  status?     : string
   subTasks?   : string[] | []
 }

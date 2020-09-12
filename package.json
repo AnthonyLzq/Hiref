@@ -1,6 +1,6 @@
 {
   "name": "hiref",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "main": "src/index.ts",
   "description": "A platform to hire people",
   "scripts": {
@@ -9,8 +9,7 @@
     "lint": "eslint src/* --ext .ts",
     "service": "nodemon",
     "start": "node dist/index.js",
-    "start:dev": "node -r dotenv/config dist/index.js",
-    "test": "ts-node -r dotenv/config ./src/database/mysql.ts"
+    "start:dev": "node -r dotenv/config dist/index.js"
   },
   "author": "AnthonyLzq <sluzquinosa@uni.pe>",
   "license": "MIT",

@@ -1,43 +1,54 @@
 /* eslint-disable no-shadow */
 
+enum GeneralErrorMessages {
+  invalidDate = 'Invalid Date',
+  missingCode = 'Code must be provided.',
+  missingDeadline = 'Deadline must be provided.',
+  missingDescription = 'Description must be provided.',
+  missingIdCompany = 'Id Company must be provided.',
+  missingIdProject = 'Id project must be provided.',
+  missingStatus = 'Status must be provided.',
+  problemUpdatingStatus = 'There was a problem trying to update the status.',
+  statusNotAllowed = 'That status is not allowed.'
+}
+
 enum ErrorMessagesForJobsController {
   problemGettingAll = 'There was a problem getting all the jobs.'
 }
 
+enum ErrorMessagesForJobOffersController {
+  missingOccupations = 'Occupations must be provided.',
+  missingRoles = 'Roles must be provided.',
+  problemDeletingJobOffer = 'There was a problem deleting the job offer',
+  problemGettingAll = 'There was a problem getting all the job offers',
+  problemGettingAllByOccupations = 'There was a problem getting all the job offers for the requested project.',
+  problemGettingAllByProject = 'There was a problem getting all the job offers for the requested project.',
+  problemGettingAllForAspirant = 'There was a problem getting all the job offers for the requested aspirant.',
+  problemGettingAllForEvaluator = 'There was a problem getting all the job offers for the requested aspirant.',
+  problemStoringJobOffers = 'There was a problem trying to store the requested job offer.'
+}
+
 enum ErrorMessagesForProjectsController {
-  invalidDate = 'Invalid Date',
-  missingCategories = 'Categories must be provided.',
-  missingDescription = 'Description must be provided',
-  missingIdCompany = 'Id Company must be provided.',
-  missingLimitDate = 'Limit date must be provided.',
-  missingName = 'Name must be provided.',
-  missingRoles = 'Roles must be provided',
-  missingSubCategories = 'Sub categories must be provided.',
-  problemGettingAll = 'There was a problem getting all the projects.',
+  missingSupervisor = 'Supervisor(s) must be provided.',
   problemGettingAllByCompany = 'There was a problem getting all the projects from the requested company.',
   problemGettingAllByStatus = 'There was a problem getting all the projects from the requested company int he requested status.',
   problemStoringProjects = 'There was a problem trying to store the project.',
   problemUpdatingProjects = 'There was a problem trying to update the project.',
-  statusNotAllowed = 'That status is not allowed.'
 }
 
 enum ErrorMessagesForTasksController {
-  invalidDate = 'Invalid Date',
-  missingIdCompany = 'Id company must be provided.',
-  missingIdProject = 'Id project must be provided.',
-  missingLimitDate = 'Limit date must be provided.',
-  missingName = 'Name must be provided.',
   missingResponsible = 'Responsible must be provided.',
-  missingStatus = 'Status must be provided.',
   missingSubTasks = 'Sub tasks must be provided.',
-  problemDeleting = 'There was a problem deleting the tasks.',
+  problemDeletingTasks = 'There was a problem deleting the task.',
   problemGettingAll = 'There was a problem getting all the tasks.',
   problemStoringTasks = 'There was a problem trying to store the task.',
   problemUpdatingTasks = 'There was a problem trying to update the task.'
 }
 
 export {
+  GeneralErrorMessages,
   ErrorMessagesForJobsController,
+  ErrorMessagesForJobOffersController,
   ErrorMessagesForProjectsController,
   ErrorMessagesForTasksController
 }
