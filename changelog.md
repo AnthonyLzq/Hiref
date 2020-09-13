@@ -1,5 +1,12 @@
 # Hiref
 
+## Version 0.7.0
+
+- Updated:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+- Pending:
+  - Finish updating [documentation](https://github.com/AnthonyLzq), three endpoints missing.
+
 ## Version 0.6.0
 
 - Implemented:

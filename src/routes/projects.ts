@@ -14,21 +14,21 @@ Projects.route('/projects/:idCompany/')
     let pc    : ProjectsC
     let result: IProjects | IProjects[] | null | undefined
 
-    if (Object.keys(query).length === 0) {
-      const { status } = query
-      pc = new ProjectsC({ idCompany, status: status as string } as DtoProjects)
+    if (!query || Object.keys(query).length === 0) {
+      pc = new ProjectsC({ idCompany } as DtoProjects)
 
       try {
-        result = await pc.process('getAllByStatus')
+        result = await pc.process('getAllByCompany')
         response(false, { result }, res, 200)
       } catch (error) {
         response(true, { message: error.message }, res, 500)
       }
     } else {
-      pc = new ProjectsC({ idCompany } as DtoProjects)
+      const { status } = query
+      pc = new ProjectsC({ idCompany, status: status as string } as DtoProjects)
 
       try {
-        result = await pc.process('getAllByCompany')
+        result = await pc.process('getAllByStatus')
         response(false, { result }, res, 200)
       } catch (error) {
         response(true, { message: error.message }, res, 500)

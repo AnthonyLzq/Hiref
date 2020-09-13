@@ -8,10 +8,10 @@ import { ITasks } from '../models/tasks'
 
 const Tasks = Router()
 
-Tasks.route('/tasks/:idCompany/:idProject/')
+Tasks.route('/tasks/:idProject/')
   .get(async (req: Request, res: Response): Promise<void> => {
-    const { params: { idCompany, idProject } } = req
-    const tc = new TasksC({ idCompany, idProject } as DtoTasks)
+    const { params: { idProject } } = req
+    const tc = new TasksC({ idProject } as DtoTasks)
 
     try {
       const result = await tc.process('getAll')
@@ -21,10 +21,9 @@ Tasks.route('/tasks/:idCompany/:idProject/')
     }
   })
   .post(async (req: Request, res: Response): Promise<void> => {
-    const { body: { args }, params: { idCompany, idProject } } = req
+    const { body: { args }, params: {  idProject } } = req
     const tc = new TasksC({
       ...args as DtoTasks,
-      idCompany,
       idProject
     } as DtoTasks)
 
@@ -46,7 +45,7 @@ Tasks.route('/tasks/:idProject/:idTask/')
     let tc    : TasksC
     let result: ITasks | ITasks[] | null | undefined
 
-    if (Object.keys(query).length === 0) {
+    if (!query || Object.keys(query).length === 0) {
       tc = new TasksC({
         ...args as DtoTasks,
         id: idTask,

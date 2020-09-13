@@ -258,7 +258,6 @@ class JobOffers {
       deadline,
       description,
       id,
-      idProject,
       occupations,
       roles,
       status
@@ -270,7 +269,6 @@ class JobOffers {
       else if (new Date(deadline).toString() === 'Invalid Date')
         throw new Error(GEM.invalidDate)
       else if (!description) throw new Error(GEM.missingDescription)
-      else if (!idProject) throw new Error(GEM.missingIdProject)
       else if (!occupations) throw new Error(EFJ.missingOccupations)
       else if (!roles) throw new Error(EFJ.missingRoles)
       else if (!status) throw new Error(GEM.missingStatus)
@@ -281,9 +279,8 @@ class JobOffers {
         id as string,
         {
           code,
-          deadline : new Date(deadline),
+          deadline: new Date(deadline),
           description,
-          idProject: new Schema.Types.ObjectId(idProject),
           occupations,
           roles,
           status
@@ -301,7 +298,6 @@ class JobOffers {
         error.message === GEM.invalidDate ||
         error.message === GEM.missingDescription ||
         error.message === GEM.missingDescription ||
-        error.message === GEM.missingIdProject ||
         error.message === EFJ.missingOccupations ||
         error.message === EFJ.missingRoles ||
         error.message === GEM.missingStatus ||

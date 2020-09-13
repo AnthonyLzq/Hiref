@@ -107,7 +107,6 @@ class Projects {
       deadline,
       description,
       id,
-      idCompany,
       status,
       supervisor
     } = this._args as DtoProjects
@@ -118,7 +117,6 @@ class Projects {
       else if (new Date(deadline).toString() === 'Invalid Date')
         throw new Error(GEM.invalidDate)
       else if (!description) throw new Error(GEM.missingDescription)
-      else if (!idCompany) throw new Error(GEM.missingIdCompany)
       else if (!supervisor) throw new Error(EFP.missingSupervisor)
       else if (!status) throw new Error(GEM.missingStatus)
       else if (!STATUS_NAMES.includes(status as string))
@@ -131,7 +129,6 @@ class Projects {
           deadline: new Date(deadline),
           description,
           id,
-          idCompany,
           status,
           supervisor
         },
@@ -147,7 +144,6 @@ class Projects {
         error.message === GEM.missingDeadline ||
         error.message === GEM.invalidDate ||
         error.message === GEM.missingDescription ||
-        error.message === GEM.missingIdCompany ||
         error.message === EFP.missingSupervisor ||
         error.message === GEM.statusNotAllowed
       )

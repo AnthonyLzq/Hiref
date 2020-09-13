@@ -20,7 +20,7 @@ JobOffers.route('/jobOffers/')
     }
   })
 
-JobOffers.route('/jobOffers/:idProject')
+JobOffers.route('/jobOffers/:idProject/')
   .post(async (req: Request, res: Response): Promise<void> => {
     const { body: { args }, params: { idProject } } = req
     const joc = new JobOffersC({
@@ -36,9 +36,9 @@ JobOffers.route('/jobOffers/:idProject')
     }
   })
 
-JobOffers.route('/jobOffers/:idProject/:idJobOffer/')
+JobOffers.route('/jobOffers/:idJobOffer/')
   .patch(async (req: Request, res: Response): Promise<void> => {
-    const { body: { args }, params: { idJobOffer, idProject }, query } = req
+    const { body: { args }, params: { idJobOffer }, query } = req
     let joc   : JobOffersC
     let result:
       | IJobOffers
@@ -58,12 +58,11 @@ JobOffers.route('/jobOffers/:idProject/:idJobOffer/')
     if (!query || Object.keys(query).length === 0) {
       joc = new JobOffersC({
         ...args as DtoJobOffers,
-        id       : idJobOffer as string,
-        idProject: idProject as string
+        id: idJobOffer as string
       } as DtoJobOffers)
 
       try {
-        result = await joc.process('store')
+        result = await joc.process('update')
         response(false, { result }, res, 200)
       } catch (error) {
         response(true, { message: error.message }, res, 500)
