@@ -39,7 +39,7 @@ Mongo connection established.
 
 ## Usage
 
-- All the endpoints, except `home`
+- All the endpoints begins in `/api`, except `home`.
 
 There are fifteen endpoints implemented:
 
@@ -55,26 +55,29 @@ There are fifteen endpoints implemented:
      ```json
      {
        "error": false,
-       "message": [
-         {
-           "_id": "Project MongoDB id",
-           "code": "Project id for the company",
-           "createdAt": "Iso date",
-           "deadline": "Iso date",
-           "description": {
-             "content": "Project content",
-             "title": "Project title"
-           },
-           "idCompany": "Company id",
-           "supervisor": [
-             {
-               "dni": "DNI",
-               "lastNames": "Moody Lucas",
-               "names": "Maximo Roy"
-             }
-           ]
-         }
-       ]
+       "message": {
+         "result": [
+           {
+             "_id": "Project MongoDB id",
+             "code": "Project id for the company",
+             "createdAt": "Iso date",
+             "deadline": "Iso date",
+             "description": {
+               "content": "Project content",
+               "title": "Project title"
+             },
+             "idCompany": "Company id",
+             "status": "Project status",
+             "supervisor": [
+               {
+                 "dni": "DNI",
+                 "lastNames": "Moody Lucas",
+                 "names": "Maximo Roy"
+               }
+             ]
+           }
+         ]
+       }
      }
      ```
 
@@ -106,20 +109,23 @@ There are fifteen endpoints implemented:
      {
        "error": false,
        "message": {
-         "code": "Company code for the project",
-         "deadline": "YEAR-MONTH-DAY",
-         "description": {
-           "content": "Project description",
-           "title": "Project name"
-         },
-         "idCompany": "Company id",
-         "supervisor": [
-           {
-             "dni": "DNI",
-             "lastNames": "Ali Johnson",
-             "names": "Sandra Trinity"
-           }
-         ]
+         "result": {
+           "_id": "Project MongoDB id",
+           "code": "Company code for the project",
+           "deadline": "YEAR-MONTH-DAY",
+           "description": {
+             "content": "Project description",
+             "title": "Project name"
+           },
+           "idCompany": "Company id",
+           "supervisor": [
+             {
+               "dni": "DNI",
+               "lastNames": "Ali Johnson",
+               "names": "Sandra Trinity"
+             }
+           ]
+         }
        }
      }
      ```
@@ -138,23 +144,25 @@ There are fifteen endpoints implemented:
      ```json
      {
        "error": false,
-       "message": [
-         {
-           "deadline": "Iso date",
-           "description": {
-             "content": "Task content",
-             "title": "Task description"
-           },
-           "_id": "Task MongoDB id",
-           "idProject": "Project MongoDB id",
-           "responsible": [
-             "Alex Pfeffer Smith",
-             "Leopoldo Laurel Mertz Connelly"
-           ],
-           "status": "Task status",
-           "subTasks": ["Sub task 1", "Sub task 2"]
-         }
-       ]
+       "message": {
+         "result": [
+           {
+             "_id": "Task MongoDB id",
+             "deadline": "Iso date",
+             "description": {
+               "content": "Task content",
+               "title": "Task description"
+             },
+             "idProject": "Project MongoDB id",
+             "responsible": [
+               "Alex Pfeffer Smith",
+               "Leopoldo Laurel Mertz Connelly"
+             ],
+             "status": "Task status",
+             "subTasks": ["Sub task 1", "Sub task 2"]
+           }
+         ]
+       }
      }
      ```
 
@@ -178,25 +186,27 @@ There are fifteen endpoints implemented:
      }
      ```
 
-     Sub tasks field is optional, in case there isn't any sub task, you should send an empty array. <a id="one-task-response"></a>The response will as follows:
+     Sub tasks field is optional, in case there isn't any sub task, you should send an empty array. <a id="one-task-response"></a>The response will be as follows:
 
      ```json
      {
        "error": false,
        "message": {
-         "deadline": "Iso date",
-         "description": {
-           "content": "Task content",
-           "title": "Task description"
-         },
-         "_id": "Task MongoDB id",
-         "idProject": "Project MongoDB id",
-         "responsible": [
-           "Alex Pfeffer Smith",
-           "Leopoldo Laurel Mertz Connelly"
-         ],
-         "status": "Task status",
-         "subTasks": ["Sub task 1", "Sub task 2"]
+         "result": {
+           "_id": "Task MongoDB id",
+           "deadline": "Iso date",
+           "description": {
+             "content": "Task content",
+             "title": "Task description"
+           },
+           "idProject": "Project MongoDB id",
+           "responsible": [
+             "Alex Pfeffer Smith",
+             "Leopoldo Laurel Mertz Connelly"
+           ],
+           "status": "Task status",
+           "subTasks": ["Sub task 1", "Sub task 2"]
+         }
        }
      }
      ```
@@ -238,27 +248,29 @@ There are fifteen endpoints implemented:
    ```json
    {
      "error": false,
-     "message": [
-       {
-         "_id": "Mongo job offer id",
-         "code": "Company code for the job offer.",
-         "deadline": "YEAR-MONTH-DAY",
-         "description": {
-           "content": "Job offer content.",
-           "title": "Job offer title"
-         },
-         "idProject": "Project MongoDB id",
-         "occupations": ["Ocupation 1", "Ocupation 2"],
-         "roles": [
-           {
-             "name": "Role 1",
-             "quantity": 12,
-             "remuneration": 930
-           }
-         ],
-         "status": "Job offer status."
-       }
-     ]
+     "message": {
+       "result": [
+         {
+           "_id": "Mongo job offer id",
+           "code": "Company code for the job offer.",
+           "deadline": "YEAR-MONTH-DAY",
+           "description": {
+             "content": "Job offer content.",
+             "title": "Job offer title"
+           },
+           "idProject": "Project MongoDB id",
+           "occupations": ["Ocupation 1", "Ocupation 2"],
+           "roles": [
+             {
+               "name": "Role 1",
+               "quantity": 12,
+               "remuneration": 930
+             }
+           ],
+           "status": "Job offer status."
+         }
+       ]
+     }
    }
    ```
 
@@ -289,33 +301,35 @@ There are fifteen endpoints implemented:
 
 10. Update a job offer: `/jobOffers/:idJobOffer/`, it has a patch method, here are some examples:
 
-    - You can send the request with a query or without it, if you send the request without, then you need the same payload that is shown [here](#jobOffer-payload), adding the field `status` in the "args". <a id="status-for-jobOffers"></a>Remember that only the following status are allowed: published, inEvaluation, rePublished, completed and canceled. <a id="one-jobOffer-payload"></a> You will get a response as follows:
+    - You can send the request with a query or without it, if you send the request without, then you need the same payload that is shown [here](#jobOffer-payload), adding the field `status` in the "args". <a id="status-for-jobOffers"></a>Remember that only the following status are allowed: published, inEvaluation, rePublished, completed and canceled. <a id="one-jobOffer-response"></a> You will get a response as follows:
 
       ```json
       {
         "error": false,
         "message": {
-          "code": "Updated company code for the job offer.",
-          "deadline": "YEAR-MONTH-DAY",
-          "description": {
-            "content": "Updated job offer content.",
-            "title": "Updated job offer title"
-          },
-          "idProject": "Project MongoDB id",
-          "occupations": ["Updated ocupation 1", "Updated ocupation 2"],
-          "roles": [
-            {
-              "name": "Updated role 1",
-              "quantity": 12,
-              "remuneration": 930
-            }
-          ],
-          "status": "Updated job offer status."
+          "result": {
+            "code": "Updated company code for the job offer.",
+            "deadline": "YEAR-MONTH-DAY",
+            "description": {
+              "content": "Updated job offer content.",
+              "title": "Updated job offer title"
+            },
+            "idProject": "Project MongoDB id",
+            "occupations": ["Updated ocupation 1", "Updated ocupation 2"],
+            "roles": [
+              {
+                "name": "Updated role 1",
+                "quantity": 12,
+                "remuneration": 930
+              }
+            ],
+            "status": "Updated job offer status."
+          }
         }
       }
       ```
 
-    - If you send the request with a query like this `?status=`, then a payload is no longer need it, and you will get the same response shown [here](#one-jobOffer-payload), but with the status updated.
+    - If you send the request with a query like this `?status=`, then a payload is no longer need it, and you will get the same response shown [here](#one-jobOffer-response), but with the status updated.
 
 11. Get all the job offers by project: `/jobOffers/getAllByProject/:idProject`, it has a get method. If you send the request, then you will get the same response shown [here](#jobOffers-response), those who belongs to the requested project.
 
@@ -329,7 +343,201 @@ There are fifteen endpoints implemented:
     }
     ```
 
-    The response will be the same shown [here](jobOffers-response#), but with the job offers that has those occupations.
+    The response will be the same shown [here](#jobOffers-response), but with the job offers that has those occupations.
+
+13. Get all the job offers by aspirant: `/jobOffers/getAllForAspirant/`, it has a get method. If you send the request. You need the following payload or you will get an [error](#error):
+
+    ```json
+    {
+      "args": {
+        "acceptedJobOffers": [
+          "Job offer id accepted 1",
+          "Job offer id accepted 2"
+        ],
+        "availableJobOffers": [
+          "Job offer id available 1",
+          "Job offer id available 2"
+        ],
+        "rejectedJobOffers": [
+          "Job offer id rejected 1",
+          "Job offer id rejected 2"
+        ]
+      }
+    }
+    ```
+
+    You will get a response as follows:
+
+    ```json
+    {
+      "error": false,
+      "message": {
+        "result": {
+          "acceptedJobOffers": [
+            {
+              "_id": "Mongo job offer id",
+              "code": "Company code of the accepted job offer.",
+              "deadline": "YEAR-MONTH-DAY",
+              "description": {
+                "content": "Content of the accepted job offer.",
+                "title": "Title of the accepted job offer."
+              },
+              "idProject": "Project MongoDB id",
+              "occupations": ["Ocupation 1", "Ocupation 2"],
+              "roles": [
+                {
+                  "name": "Role 1",
+                  "quantity": 12,
+                  "remuneration": 930
+                }
+              ],
+              "status": "Status of the accepted job offer."
+            }
+          ],
+          "availableJobOffers": [
+            {
+              "_id": "Mongo job offer id",
+              "code": "Company code of the available job offer.",
+              "deadline": "YEAR-MONTH-DAY",
+              "description": {
+                "content": "Content of the available job offer.",
+                "title": "Title of the available job offer."
+              },
+              "idProject": "Project MongoDB id",
+              "occupations": ["Ocupation 1", "Ocupation 2"],
+              "roles": [
+                {
+                  "name": "Role 1",
+                  "quantity": 12,
+                  "remuneration": 930
+                }
+              ],
+              "status": "Status of the available job offer."
+            }
+          ],
+          "rejectedJobOffers": [
+            {
+              "_id": "Mongo job offer id",
+              "code": "Company code of the rejected job offer.",
+              "deadline": "YEAR-MONTH-DAY",
+              "description": {
+                "content": "Content of the rejected job offer.",
+                "title": "Title of the rejected job offer."
+              },
+              "idProject": "Project MongoDB id",
+              "occupations": ["Ocupation 1", "Ocupation 2"],
+              "roles": [
+                {
+                  "name": "Role 1",
+                  "quantity": 12,
+                  "remuneration": 930
+                }
+              ],
+              "status": "Status of the rejected job offer."
+            }
+          ]
+        }
+      }
+    }
+    ```
+
+14. Get all the job offers for the evaluator: `/jobOffers/getAllForEvaluator/`, it has a get method. If you send the request. You need the following payload or you will get an [error](#error):
+
+    ```json
+    {
+      "args": {
+        "availableJobOffers": [
+          "Job offer id available 1",
+          "Job offer id available 2"
+        ],
+        "completedJobOffers": [
+          "Job offer id completed 1",
+          "Job offer id completed 2"
+        ],
+        "inEvaluationJobOffers": [
+          "Job offer id in evaluation 1",
+          "Job offer id in evaluation 2"
+        ]
+      }
+    }
+    ```
+
+    You will get a response as follows:
+
+    ```json
+    {
+      "error": false,
+      "message": {
+        "result": {
+          "availableJobOffers": [
+            {
+              "_id": "Mongo job offer id",
+              "code": "Company code of the available job offer.",
+              "deadline": "YEAR-MONTH-DAY",
+              "description": {
+                "content": "Content of the available job offer.",
+                "title": "Title of the available job offer."
+              },
+              "idProject": "Project MongoDB id",
+              "occupations": ["Ocupation 1", "Ocupation 2"],
+              "roles": [
+                {
+                  "name": "Role 1",
+                  "quantity": 12,
+                  "remuneration": 930
+                }
+              ],
+              "status": "Status of the available job offer."
+            }
+          ],
+          "completedJobOffers": [
+            {
+              "_id": "Mongo job offer id",
+              "code": "Company code of the completed job offer.",
+              "deadline": "YEAR-MONTH-DAY",
+              "description": {
+                "content": "Content of the completed job offer.",
+                "title": "Title of the completed job offer."
+              },
+              "idProject": "Project MongoDB id",
+              "occupations": ["Ocupation 1", "Ocupation 2"],
+              "roles": [
+                {
+                  "name": "Role 1",
+                  "quantity": 12,
+                  "remuneration": 930
+                }
+              ],
+              "status": "Status of the completed job offer."
+            }
+          ],
+          "inEvaluationJobOffers": [
+            {
+              "_id": "Mongo job offer id",
+              "code": "Company code of the inEvaluation job offer.",
+              "deadline": "YEAR-MONTH-DAY",
+              "description": {
+                "content": "Content of the inEvaluation job offer.",
+                "title": "Title of the inEvaluation job offer."
+              },
+              "idProject": "Project MongoDB id",
+              "occupations": ["Ocupation 1", "Ocupation 2"],
+              "roles": [
+                {
+                  "name": "Role 1",
+                  "quantity": 12,
+                  "remuneration": 930
+                }
+              ],
+              "status": "Status of the inEvaluation job offer."
+            }
+          ]
+        }
+      }
+    }
+    ```
+
+15. Delete a job offer: `/jobOffers/:idJobOffer/`, it has a delete method. If you send the request, then the request job offer will be deleted from the database. You will get the same response shown [here](#one-jobOffer-response), but with the data of the deleted job offer.
 
 ### Notes
 

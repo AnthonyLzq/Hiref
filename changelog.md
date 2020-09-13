@@ -1,5 +1,13 @@
 # Hiref
 
+## Version 0.8.0
+
+- Updated:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+- Pending:
+  - Firebase connection.
+  - Notifications to the aspirants when a job offer is published.
+
 ## Version 0.7.0
 
 - Updated:
