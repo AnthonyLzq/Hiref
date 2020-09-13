@@ -99,7 +99,7 @@ JobOffers.route('/jobOffers/getAllByProject/:idProject')
   })
 
 JobOffers.route('/jobOffers/getAllByOccupations/')
-  .get(async (req: Request, res: Response): Promise<void> => {
+  .post(async (req: Request, res: Response): Promise<void> => {
     const { body: { args } } = req
     const joc = new JobOffersC(args as DtoJobOffers)
 
@@ -112,7 +112,7 @@ JobOffers.route('/jobOffers/getAllByOccupations/')
   })
 
 JobOffers.route('/jobOffers/getAllForAspirant/')
-  .get(async (req: Request, res: Response): Promise<void> => {
+  .post(async (req: Request, res: Response): Promise<void> => {
     const { body: { args } } = req
     const joc = new JobOffersC(args as DtoJobOffers)
 
@@ -125,7 +125,7 @@ JobOffers.route('/jobOffers/getAllForAspirant/')
   })
 
 JobOffers.route('/jobOffers/getAllForEvaluator/')
-  .get(async (req: Request, res: Response): Promise<void> => {
+  .post(async (req: Request, res: Response): Promise<void> => {
     const { body: { args } } = req
     const joc = new JobOffersC(args as DtoJobOffers)
 

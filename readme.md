@@ -333,7 +333,7 @@ There are fifteen endpoints implemented:
 
 11. Get all the job offers by project: `/jobOffers/getAllByProject/:idProject`, it has a get method. If you send the request, then you will get the same response shown [here](#jobOffers-response), those who belongs to the requested project.
 
-12. Get all the job offers by occupations `/jobOffers/getAllByOccupations/`, it has a get method. You need the following payload or you will get an [error](#error):
+12. Get all the job offers by occupations `/jobOffers/getAllByOccupations/`, it has a post method. You need the following payload or you will get an [error](#error):
 
     ```json
     {
@@ -345,7 +345,7 @@ There are fifteen endpoints implemented:
 
     The response will be the same shown [here](#jobOffers-response), but with the job offers that has those occupations.
 
-13. Get all the job offers by aspirant: `/jobOffers/getAllForAspirant/`, it has a get method. If you send the request. You need the following payload or you will get an [error](#error):
+13. Get all the job offers by aspirant: `/jobOffers/getAllForAspirant/`, it has a post method. If you send the request. You need the following payload or you will get an [error](#error):
 
     ```json
     {
@@ -441,7 +441,7 @@ There are fifteen endpoints implemented:
     }
     ```
 
-14. Get all the job offers for the evaluator: `/jobOffers/getAllForEvaluator/`, it has a get method. If you send the request. You need the following payload or you will get an [error](#error):
+14. Get all the job offers for the evaluator: `/jobOffers/getAllForEvaluator/`, it has a post method. If you send the request. You need the following payload or you will get an [error](#error):
 
     ```json
     {

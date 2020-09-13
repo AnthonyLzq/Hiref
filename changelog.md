@@ -1,5 +1,14 @@
 # Hiref
 
+## Version 0.8.1
+
+- Fixed:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+  - Endpoints that had a get request with payload were changed for post.
+- Pending:
+  - Firebase connection.
+  - Notifications to the aspirants when a job offer is published.
+
 ## Version 0.8.0
 
 - Updated:
