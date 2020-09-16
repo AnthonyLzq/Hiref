@@ -2,7 +2,8 @@
 import knex from 'knex'
 
 interface CustomNodeJSGlobal extends NodeJS.Global {
-  mysqlDatabase: knex<any, unknown[]>
+  firestoreDatabase: FirebaseFirestore.Firestore,
+  mysqlDatabase    : knex<any, unknown[]>
 }
 
 export { CustomNodeJSGlobal }

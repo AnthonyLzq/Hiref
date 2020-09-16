@@ -1,5 +1,20 @@
 # Hiref
 
+## Version 0.6.0
+
+- Implemented:
+  - Firebase connection.
+  - Global variable to handle Firebase connection.
+- Pending:
+  - To return the name of the company from firebase.
+  - To add the field applicants to the model of job offers.
+  - To add the field description to the roles.
+  - To create three endpoints:
+    - Get all supervisors (firebase).
+    - Get all supervisors per project (firebase).
+    - Get all the clients (companies, from firebase).
+    - Change the endpoint to store projects, now it receives an array of supervisor ids.
+
 ## Version 0.5.0
 
 - Implemented:

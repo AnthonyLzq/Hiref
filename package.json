@@ -1,6 +1,6 @@
 {
   "name": "hiref",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "main": "src/index.ts",
   "description": "A platform to hire people",
   "scripts": {
@@ -10,12 +10,14 @@
     "service": "nodemon",
     "start": "node dist/index.js",
     "start:dev": "node -r dotenv/config dist/index.js",
-    "test": "ts-node -r dotenv/config ./src/database/mysql.ts"
+    "test": "ts-node -r dotenv/config src/database/firebase.ts"
   },
   "author": "AnthonyLzq <sluzquinosa@uni.pe>",
   "license": "MIT",
   "dependencies": {
+    "@google-cloud/firestore": "^4.2.0",
     "express": "^4.17.1",
+    "firebase-admin": "^9.2.0",
     "knex": "^0.21.5",
     "mongoose": "^5.10.3",
     "morgan": "^1.10.0",
