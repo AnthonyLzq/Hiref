@@ -12,30 +12,40 @@ interface IJobOffers extends ICommonDataForProjectsTasksAndJobOffers {
   roles      : IRoles[]
 }
 
-const Roles = new Schema({
-  description: {
-    required: true,
-    type    : InformationSchema
+const Roles = new Schema(
+  {
+    applicants: {
+      required: false,
+      type    : [String]
+    },
+    description: {
+      required: true,
+      type    : InformationSchema
+    },
+    quantity: {
+      required: true,
+      type    : Number
+    },
+    remuneration: {
+      required: true,
+      type    : Number
+    }
   },
-  quantity: {
-    required: true,
-    type    : Number
-  },
-  remuneration: {
-    required: true,
-    type    : Number
+  {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    _id: false
   }
-})
+)
 
 const JobOffersToExtend = new Schema({
-  applicants: {
-    required: false,
-    type    : [String]
-  },
   idProject: {
     ref     : 'projects',
     required: true,
     type    : Schema.Types.ObjectId
+  },
+  numberApplicants: {
+    required: true,
+    type    : Number
   },
   occupations: {
     required: true,

@@ -249,10 +249,18 @@ There are sixteen endpoints implemented:
              "title": "Job offer title"
            },
            "idProject": "Project MongoDB id",
+           "numberApplicants": 2,
            "occupations": ["Ocupation 1", "Ocupation 2"],
            "roles": [
              {
-               "name": "Role 1",
+               "applicants": [
+                 "Aspirant 1 Firebase id",
+                 "Aspirant 2 Firebase id"
+               ],
+               "description": {
+                 "content": "Role content",
+                 "title": "Role title"
+               },
                "quantity": 12,
                "remuneration": 930
              }
@@ -278,7 +286,10 @@ There are sixteen endpoints implemented:
        "occupations": ["Ocupation 1", "Ocupation 2"],
        "roles": [
          {
-           "name": "Role 1",
+           "description": {
+             "content": "Role content",
+             "title": "Role title"
+           },
            "quantity": 12,
            "remuneration": 930
          }
@@ -308,7 +319,14 @@ There are sixteen endpoints implemented:
             "occupations": ["Updated ocupation 1", "Updated ocupation 2"],
             "roles": [
               {
-                "name": "Updated role 1",
+                "applicants": [
+                  "Aspirant 1 Firebase id",
+                  "Aspirant 2 Firebase id"
+                ],
+                "description": {
+                  "content": "Updated role content",
+                  "title": "Updated role title"
+                },
                 "quantity": 12,
                 "remuneration": 930
               }
@@ -373,10 +391,18 @@ There are sixteen endpoints implemented:
                 "title": "Title of the accepted job offer."
               },
               "idProject": "Project MongoDB id",
+              "numberApplicants": 2,
               "occupations": ["Ocupation 1", "Ocupation 2"],
               "roles": [
                 {
-                  "name": "Role 1",
+                  "applicants": [
+                    "Aspirant 1 Firebase id",
+                    "Aspirant 2 Firebase id"
+                  ],
+                  "description": {
+                    "content": "Role content",
+                    "title": "Role title"
+                  },
                   "quantity": 12,
                   "remuneration": 930
                 }
@@ -394,10 +420,18 @@ There are sixteen endpoints implemented:
                 "title": "Title of the available job offer."
               },
               "idProject": "Project MongoDB id",
+              "numberApplicants": 2,
               "occupations": ["Ocupation 1", "Ocupation 2"],
               "roles": [
                 {
-                  "name": "Role 1",
+                  "applicants": [
+                    "Aspirant 1 Firebase id",
+                    "Aspirant 2 Firebase id"
+                  ],
+                  "description": {
+                    "content": "Role content",
+                    "title": "Role title"
+                  },
                   "quantity": 12,
                   "remuneration": 930
                 }
@@ -415,10 +449,18 @@ There are sixteen endpoints implemented:
                 "title": "Title of the rejected job offer."
               },
               "idProject": "Project MongoDB id",
+              "numberApplicants": 2,
               "occupations": ["Ocupation 1", "Ocupation 2"],
               "roles": [
                 {
-                  "name": "Role 1",
+                  "applicants": [
+                    "Aspirant 1 Firebase id",
+                    "Aspirant 2 Firebase id"
+                  ],
+                  "description": {
+                    "content": "Role content",
+                    "title": "Role title"
+                  },
                   "quantity": 12,
                   "remuneration": 930
                 }
@@ -469,10 +511,18 @@ There are sixteen endpoints implemented:
                 "title": "Title of the available job offer."
               },
               "idProject": "Project MongoDB id",
+              "numberApplicants": 2,
               "occupations": ["Ocupation 1", "Ocupation 2"],
               "roles": [
                 {
-                  "name": "Role 1",
+                  "applicants": [
+                    "Aspirant 1 Firebase id",
+                    "Aspirant 2 Firebase id"
+                  ],
+                  "description": {
+                    "content": "Role content",
+                    "title": "Role title"
+                  },
                   "quantity": 12,
                   "remuneration": 930
                 }
@@ -490,10 +540,18 @@ There are sixteen endpoints implemented:
                 "title": "Title of the completed job offer."
               },
               "idProject": "Project MongoDB id",
+              "numberApplicants": 2,
               "occupations": ["Ocupation 1", "Ocupation 2"],
               "roles": [
                 {
-                  "name": "Role 1",
+                  "applicants": [
+                    "Aspirant 1 Firebase id",
+                    "Aspirant 2 Firebase id"
+                  ],
+                  "description": {
+                    "content": "Role content",
+                    "title": "Role title"
+                  },
                   "quantity": 12,
                   "remuneration": 930
                 }
@@ -511,10 +569,18 @@ There are sixteen endpoints implemented:
                 "title": "Title of the inEvaluation job offer."
               },
               "idProject": "Project MongoDB id",
+              "numberApplicants": 2,
               "occupations": ["Ocupation 1", "Ocupation 2"],
               "roles": [
                 {
-                  "name": "Role 1",
+                  "applicants": [
+                    "Aspirant 1 Firebase id",
+                    "Aspirant 2 Firebase id"
+                  ],
+                  "description": {
+                    "content": "Role content",
+                    "title": "Role title"
+                  },
                   "quantity": 12,
                   "remuneration": 930
                 }
@@ -534,7 +600,17 @@ There are sixteen endpoints implemented:
     ```json
     {
       "args": {
-        "applicants": ["Aspirant Firebase id"]
+        "roles": [
+          {
+            "applicants": ["Aspirant Firebase id"],
+            "description": {
+              "content": "Role content 1",
+              "title": "Role title 1"
+            },
+            "quantity": 12,
+            "remuneration": 930
+          }
+        ]
       }
     }
     ```

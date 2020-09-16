@@ -1,6 +1,7 @@
 import { IInformation } from './utils/informationInterface'
 
 interface IRoles {
+  applicants? : string[]
   description : IInformation
   quantity    : number
   remuneration: number
@@ -12,19 +13,19 @@ interface IRoles {
  */
 
 interface DtoJobOffers {
-  accepted?    : string[]
-  applicants?  : string[]
-  code?        : string
-  completed?   : string[]
-  deadline?    : Date
-  description? : IInformation
-  id?          : string
-  idProject?   : string
-  inEvaluation?: string[]
-  occupations? : string[]
-  rejected?    : string[]
-  roles?       : IRoles[]
-  status?      : string
+  accepted?        : string[]
+  code?            : string
+  completed?       : string[]
+  deadline?        : Date
+  description?     : IInformation
+  id?              : string
+  idProject?       : string
+  inEvaluation?    : string[]
+  numberApplicants?: number
+  occupations?     : string[]
+  rejected?        : string[]
+  roles?           : IRoles[]
+  status?          : string
 }
 
 export { DtoJobOffers, IRoles }

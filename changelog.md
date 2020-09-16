@@ -1,5 +1,19 @@
 # Hiref
 
+## Version 0.11.0
+
+- Implemented:
+  - Added field applicants to each role in the job offer (this field is an array that stores firebase ids from the aspirants).
+  - Added field number of applicants in the job offer, which is incremented each time an application is performed.
+- Updated:
+  - Removed internal \_id for sub-documents.
+- Pending:
+  - To return the name of the company from firebase.
+  - To create three endpoints:
+    - Get all supervisors (firebase).
+    - Get all supervisors per project (firebase).
+    - Get all the clients (companies, from firebase).
+
 ## Version 0.10.1
 
 - Fixed:
@@ -11,7 +25,6 @@
     - Get all supervisors (firebase).
     - Get all supervisors per project (firebase).
     - Get all the clients (companies, from firebase).
-    - Change the endpoint to store projects, now it receives an array of supervisor ids.
 
 ## Version 0.10.0
 
@@ -29,7 +42,6 @@
     - Get all supervisors (firebase).
     - Get all supervisors per project (firebase).
     - Get all the clients (companies, from firebase).
-    - Change the endpoint to store projects, now it receives an array of supervisor ids.
 
 ## Version 0.9.0
 

@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable no-extra-parens */
+/* eslint-disable max-len, @typescript-eslint/naming-convention, no-extra-parens */
 import { Schema } from 'mongoose'
-import { DtoJobOffers } from '../dto-interfaces/jobOffers.dto'
+import { DtoJobOffers, IRoles } from '../dto-interfaces/jobOffers.dto'
+import { IInformation } from '../dto-interfaces/utils/informationInterface'
 import { IJobOffers, JobOffersModel, STATUS_NAMES } from '../models/jobOffers'
 import {
   ErrorMessagesForJobOffersController as EFJ,
@@ -21,13 +21,13 @@ class JobOffers {
     | Promise<IJobOffers[]>
     | Promise<IJobOffers | null>
     | Promise<{
-        acceptedJobOffers : IJobOffers[],
-        availableJobOffers: IJobOffers[],
+        acceptedJobOffers : IJobOffers[]
+        availableJobOffers: IJobOffers[]
         rejectedJobOffers : IJobOffers[]
       }>
     | Promise<{
-        availableJobOffers   : IJobOffers[],
-        completedJobOffers   : IJobOffers[],
+        availableJobOffers   : IJobOffers[]
+        completedJobOffers   : IJobOffers[]
         inEvaluationJobOffers: IJobOffers[]
       }>
     | undefined {
@@ -115,8 +115,8 @@ class JobOffers {
   }
 
   private async _getAllForAspirant (): Promise<{
-    acceptedJobOffers : IJobOffers[],
-    availableJobOffers: IJobOffers[],
+    acceptedJobOffers : IJobOffers[]
+    availableJobOffers: IJobOffers[]
     rejectedJobOffers : IJobOffers[]
   }> {
     const { accepted, occupations, rejected } = this._args as DtoJobOffers
@@ -161,8 +161,8 @@ class JobOffers {
   }
 
   private async _getAllForEvaluator (): Promise<{
-    availableJobOffers   : IJobOffers[],
-    completedJobOffers   : IJobOffers[],
+    availableJobOffers   : IJobOffers[]
+    completedJobOffers   : IJobOffers[]
     inEvaluationJobOffers: IJobOffers[]
   }> {
     const { completed, inEvaluation } = this._args as DtoJobOffers
@@ -219,12 +219,13 @@ class JobOffers {
 
       const newJobOffer = new JobOffersModel({
         code,
-        deadline: new Date(deadline),
+        deadline        : new Date(deadline),
         description,
         idProject,
+        numberApplicants: 0,
         occupations,
         roles,
-        status  : 'published'
+        status          : 'published'
       })
       const result = await newJobOffer.save()
 
@@ -249,16 +250,22 @@ class JobOffers {
     }
   }
 
-  private async _postulation ():  Promise<IJobOffers | null> {
-    const { id, applicants } = this._args as DtoJobOffers
+  private async _postulation (): Promise<IJobOffers | null> {
+    const { id, roles } = this._args as DtoJobOffers
 
     try {
-      if (!applicants) throw new Error(EFJ.missingApplicants)
+      if (!roles) throw new Error(EFJ.missingRoles)
+
+      const aspirant = (((roles as IRoles[])[0] as IRoles).applicants as string[])[0]
+      const roleName =  (((roles as IRoles[])[0] as IRoles).description as IInformation).title
 
       const updatedOffer = await JobOffersModel.findByIdAndUpdate(
-        id,
-        { $push: { applicants: (applicants as string[])[0] } },
-        { new: true }
+        id as string,
+        {
+          $addToSet: { 'roles.$[r].applicants': aspirant },
+          $inc     : { numberApplicants: 1 }
+        },
+        { arrayFilters: [{ 'r.description.title': roleName }], new: true }
       )
 
       return updatedOffer
@@ -272,16 +279,8 @@ class JobOffers {
   }
 
   private async _update (): Promise<IJobOffers | null> {
-    const {
-      applicants,
-      code,
-      deadline,
-      description,
-      id,
-      occupations,
-      roles,
-      status
-    } = this._args as DtoJobOffers
+    const { code, deadline, description, id, occupations, roles, status } = this
+      ._args as DtoJobOffers
 
     try {
       if (!code) throw new Error(GEM.missingCode)
@@ -295,39 +294,20 @@ class JobOffers {
       else if (!STATUS_NAMES.includes(status))
         throw new Error(GEM.statusNotAllowed)
 
-      let updatedJobOffer: IJobOffers | null
-
-      if (!applicants)
-        updatedJobOffer = await JobOffersModel.findByIdAndUpdate(
-          id as string,
-          {
-            code,
-            deadline: new Date(deadline),
-            description,
-            occupations,
-            roles,
-            status
-          },
-          {
-            new: true
-          }
-        )
-      else
-        updatedJobOffer = await JobOffersModel.findByIdAndUpdate(
-          id as string,
-          {
-            applicants,
-            code,
-            deadline: new Date(deadline),
-            description,
-            occupations,
-            roles,
-            status
-          },
-          {
-            new: true
-          }
-        )
+      const updatedJobOffer = await JobOffersModel.findByIdAndUpdate(
+        id as string,
+        {
+          code,
+          deadline: new Date(deadline),
+          description,
+          occupations,
+          roles,
+          status
+        },
+        {
+          new: true
+        }
+      )
 
       return updatedJobOffer
     } catch (error) {
