@@ -1,6 +1,6 @@
 # Hiref
 
-## Version 0.6.0
+## Version 0.9.0
 
 - Implemented:
   - Firebase connection.
@@ -14,6 +14,40 @@
     - Get all supervisors per project (firebase).
     - Get all the clients (companies, from firebase).
     - Change the endpoint to store projects, now it receives an array of supervisor ids.
+
+## Version 0.8.1
+
+- Fixed:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+  - Endpoints that had a get request with payload were changed for post.
+- Pending:
+  - Firebase connection.
+  - Notifications to the aspirants when a job offer is published.
+
+## Version 0.8.0
+
+- Updated:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+- Pending:
+  - Firebase connection.
+  - Notifications to the aspirants when a job offer is published.
+
+## Version 0.7.0
+
+- Updated:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+- Pending:
+  - Finish updating [documentation](https://github.com/AnthonyLzq), three endpoints missing.
+
+## Version 0.6.0
+
+- Implemented:
+  - Job offers endpoint.
+  - Code refactoring, job offers are now created from a project.
+- Updated:
+  - Error messages.
+- Pending:
+  - To update [documentation](https://github.com/AnthonyLzq/Hiref#readme).
 
 ## Version 0.5.0
 

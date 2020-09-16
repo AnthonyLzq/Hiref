@@ -1,19 +1,19 @@
-interface IRoles {
-  name        : string,
-  quantity    : number,
-  remuneration: number,
+import { IInformation } from './utils/informationInterface'
+
+interface ISupervisor {
+  dni      : string
+  lastNames: string
+  names    : string
 }
 
 interface DtoProjects {
-  categories?   : string[],
-  description?  : string,
-  id?           : string,
-  idCompany?    : string,
-  limitDate?    : Date,
-  name?         : string,
-  roles?        : IRoles[],
-  status?       : string,
-  subCategories?: string[]
+  code?       : string
+  deadline?   : Date
+  description?: IInformation
+  id?         : string
+  idCompany?  : string
+  status?     : string
+  supervisor? : ISupervisor[]
 }
 
-export { IRoles, DtoProjects }
+export { ISupervisor, DtoProjects }

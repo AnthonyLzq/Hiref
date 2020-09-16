@@ -24,7 +24,7 @@ class Jobs {
   private async _getAll (): Promise<Record<string, unknown>[]> {
     try {
       const jobFamilies = await global.mysqlDatabase
-        .select('id_jobfamily as id', 'description as jobFamily')
+        .select('id_jobfamily as id', 'description as jobFamilyName')
         .from('jobfamily')
       const queryResult = await global.mysqlDatabase
         .select(
@@ -45,8 +45,8 @@ class Jobs {
         queryResult.forEach(row => {
           if (row.jobFamilyId === jobFamily.id)
             occupations.push({
-              occupation  : row.occupation as string,
-              occupationId: row.occupationId as string
+              occupationId  : row.occupationId as string,
+              occupationName: row.occupation as string
             })
         })
         this._allJobs.push({ jobFamily, occupations })

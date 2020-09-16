@@ -8,25 +8,22 @@ import { IProjects } from '../models/projects'
 
 const Projects = Router()
 
-Projects.route('/projects/')
-  .get(async (req: Request, res: Response): Promise<void> => {
-    const pc = new ProjectsC()
-
-    try {
-      const result = await pc.process('getAll')
-      response(false, { result }, res, 200)
-    } catch (error) {
-      console.error(error)
-      response(true, { message: error.message }, res, 500)
-    }
-  })
-
 Projects.route('/projects/:idCompany/')
   .get(async (req: Request, res: Response): Promise<void> => {
     const { params: { idCompany }, query } = req
     let pc    : ProjectsC
     let result: IProjects | IProjects[] | null | undefined
-    if (Object.keys(query).length > 0) {
+
+    if (!query || Object.keys(query).length === 0) {
+      pc = new ProjectsC({ idCompany } as DtoProjects)
+
+      try {
+        result = await pc.process('getAllByCompany')
+        response(false, { result }, res, 200)
+      } catch (error) {
+        response(true, { message: error.message }, res, 500)
+      }
+    } else {
       const { status } = query
       pc = new ProjectsC({ idCompany, status: status as string } as DtoProjects)
 
@@ -34,17 +31,6 @@ Projects.route('/projects/:idCompany/')
         result = await pc.process('getAllByStatus')
         response(false, { result }, res, 200)
       } catch (error) {
-        console.error(error)
-        response(true, { message: error.message }, res, 500)
-      }
-    } else {
-      pc = new ProjectsC({ idCompany } as DtoProjects)
-
-      try {
-        result = await pc.process('getAllByCompany')
-        response(false, { result }, res, 200)
-      } catch (error) {
-        console.error(error)
         response(true, { message: error.message }, res, 500)
       }
     }
@@ -60,26 +46,41 @@ Projects.route('/projects/:idCompany/')
       const result = await pc.process('store')
       response(false, { result }, res, 200)
     } catch (error) {
-      console.error(error)
       response(true, { message: error.message }, res, 500)
     }
   })
 
-Projects.route('/projects/:idCompany/:idProject/')
+Projects.route('/projects/:idProject/')
   .patch(async (req: Request, res: Response): Promise<void> => {
-    const { body: { args }, params: { idCompany, idProject } } = req
-    const pc = new ProjectsC({
-      ...args as DtoProjects,
-      idCompany: idCompany as string,
-      idProject: idProject as string
-    } as DtoProjects)
+    const { body: { args }, params: { idProject }, query } = req
+    let pc    : ProjectsC
+    let result: IProjects | IProjects[] | null | undefined
 
-    try {
-      const result = await pc.process('update')
-      response(false, { result }, res, 200)
-    } catch (error) {
-      console.error(error)
-      response(true, { message: error.message }, res, 500)
+    if (!query || Object.keys(query).length === 0) {
+      pc = new ProjectsC({
+        ...args as DtoProjects,
+        id: idProject as string
+      } as DtoProjects)
+
+      try {
+        result = await pc.process('update')
+        response(false, { result }, res, 200)
+      } catch (error) {
+        response(true, { message: error.message }, res, 500)
+      }
+    } else {
+      const { status } = query
+      pc = new ProjectsC({
+        id    : idProject as string,
+        status: status as string
+      } as DtoProjects)
+
+      try {
+        result = await pc.process('updateStatus')
+        response(false, { result }, res, 200)
+      } catch (error) {
+        response(true, { message: error.message }, res, 500)
+      }
     }
   })
 
