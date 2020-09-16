@@ -78,21 +78,19 @@ class Tasks {
       let newTask: ITasks
       if (subTasks && subTasks.length > 0)
         newTask = new TasksModel({
-          deadline         : new Date(deadline),
+          deadline: new Date(deadline),
           description,
           idProject,
           responsible,
-          responsibleNumber: responsible.length,
           status,
           subTasks
         })
       else
         newTask = new TasksModel({
-          deadline         : new Date(deadline),
+          deadline: new Date(deadline),
           description,
           idProject,
           responsible,
-          responsibleNumber: responsible.length,
           status
         })
       const result = await newTask.save()

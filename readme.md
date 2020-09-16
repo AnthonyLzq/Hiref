@@ -41,7 +41,7 @@ Mongo connection established.
 
 - All the endpoints begins in `/api`, except `home`.
 
-There are fifteen endpoints implemented:
+There are sixteen endpoints implemented:
 
 1. Home: `/`, it has a get method. It is only decorative.
 2. Projects by company: `/projects/:idCompany/`, it has a get and a post method. Here are some examples:
@@ -68,12 +68,9 @@ There are fifteen endpoints implemented:
              },
              "idCompany": "Company id",
              "status": "Project status",
-             "supervisor": [
-               {
-                 "dni": "DNI",
-                 "lastNames": "Moody Lucas",
-                 "names": "Maximo Roy"
-               }
+             "supervisors": [
+               "Supervisor_1 Firebase id",
+               "Supervisor_2 Firebase id"
              ]
            }
          ]
@@ -93,11 +90,7 @@ There are fifteen endpoints implemented:
            "title": "Project name"
          },
          "idCompany": "Company id",
-         "supervisor": {
-           "dni": "DNI",
-           "lastNames": "Ali Johnson",
-           "names": "Sandra Trinity"
-         }
+         "supervisors": ["Supervisor_1 Firebase id", "Supervisor_2 Firebase id"]
        }
      }
      ```
@@ -118,12 +111,9 @@ There are fifteen endpoints implemented:
              "title": "Project name"
            },
            "idCompany": "Company id",
-           "supervisor": [
-             {
-               "dni": "DNI",
-               "lastNames": "Ali Johnson",
-               "names": "Sandra Trinity"
-             }
+           "supervisors": [
+             "Supervisor_1 Firebase id",
+             "Supervisor_2 Firebase id"
            ]
          }
        }
@@ -155,8 +145,8 @@ There are fifteen endpoints implemented:
              },
              "idProject": "Project MongoDB id",
              "responsible": [
-               "Alex Pfeffer Smith",
-               "Leopoldo Laurel Mertz Connelly"
+               "Responsible_1 Firebase id",
+               "Responsible_2 Firebase id"
              ],
              "status": "Task status",
              "subTasks": ["Sub task 1", "Sub task 2"]
@@ -177,8 +167,8 @@ There are fifteen endpoints implemented:
            "content": "Task content"
          },
          "responsible": [
-           "Lexus Wilfred Murphy O'Hara",
-           "Barney Anderson Larson"
+           "Responsible_1 Firebase id",
+           "Responsible_2 Firebase id"
          ],
          "status": "Task status",
          "subTask": ["Sub task 1", "Sub task 2"]
@@ -201,8 +191,8 @@ There are fifteen endpoints implemented:
            },
            "idProject": "Project MongoDB id",
            "responsible": [
-             "Alex Pfeffer Smith",
-             "Leopoldo Laurel Mertz Connelly"
+             "Responsible_1 Firebase id",
+             "Responsible_2 Firebase id"
            ],
            "status": "Task status",
            "subTasks": ["Sub task 1", "Sub task 2"]
@@ -538,6 +528,18 @@ There are fifteen endpoints implemented:
     ```
 
 15. Delete a job offer: `/jobOffers/:idJobOffer/`, it has a delete method. If you send the request, then the request job offer will be deleted from the database. You will get the same response shown [here](#one-jobOffer-response), but with the data of the deleted job offer.
+
+16. Postulate to a job offer: `/jobOffers/postulate/:idJobOffer/`, it has a post method. If you send the request. You need the following payload or you will get an [error](#error):
+
+    ```json
+    {
+      "args": {
+        "applicants": ["Aspirant Firebase id"]
+      }
+    }
+    ```
+
+    The response will be the same shown [here](#jobOffers-response), but with a new field called applicants.
 
 ### Notes
 

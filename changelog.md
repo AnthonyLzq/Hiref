@@ -1,5 +1,23 @@
 # Hiref
 
+## Version 0.10.0
+
+- Implemented:
+  - Field description (information interface) to the roles in a job offer.
+  - Field applicants to the job offer.
+  - Endpoint to postulate to a job offer.
+- Updated:
+  - Now, only the supervisor ids (from Firebase) are stored in the project collection (MongoDB).
+  - Removed responsible number from the task model.
+- Pending:
+  - To return the name of the company from firebase.
+  - To add the field applicants to the model of job offers.
+  - To create three endpoints:
+    - Get all supervisors (firebase).
+    - Get all supervisors per project (firebase).
+    - Get all the clients (companies, from firebase).
+    - Change the endpoint to store projects, now it receives an array of supervisor ids.
+
 ## Version 0.9.0
 
 - Implemented:

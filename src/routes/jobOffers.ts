@@ -150,4 +150,20 @@ JobOffers.route('/jobOffers/:idJobOffer/')
     }
   })
 
+JobOffers.route('/jobOffers/postulate/:idJobOffer/')
+  .post(async (req: Request, res: Response): Promise<void> => {
+    const { body: { args }, params: { idJobOffer } }  = req
+    const joc = new JobOffersC({
+      ...args as DtoJobOffers,
+      id: idJobOffer as string
+    } as DtoJobOffers)
+
+    try {
+      const result = await joc.process('postulation')
+      response(false, { result }, res, 200)
+    } catch (error) {
+      response(true, { message: error.message }, res, 500)
+    }
+  })
+
 export { JobOffers }

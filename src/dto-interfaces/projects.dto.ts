@@ -1,11 +1,5 @@
 import { IInformation } from './utils/informationInterface'
 
-interface ISupervisor {
-  dni      : string
-  lastNames: string
-  names    : string
-}
-
 interface DtoProjects {
   code?       : string
   deadline?   : Date
@@ -13,7 +7,7 @@ interface DtoProjects {
   id?         : string
   idCompany?  : string
   status?     : string
-  supervisor? : ISupervisor[]
+  supervisors?: string[]
 }
 
-export { ISupervisor, DtoProjects }
+export { DtoProjects }

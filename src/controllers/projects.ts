@@ -61,7 +61,7 @@ class Projects {
       deadline,
       description,
       idCompany,
-      supervisor
+      supervisors
     } = this._args as DtoProjects
 
     try {
@@ -71,7 +71,7 @@ class Projects {
         throw new Error(GEM.invalidDate)
       else if (!idCompany) throw new Error(GEM.missingIdCompany)
       else if (!description) throw new Error(GEM.missingDescription)
-      else if (!supervisor) throw new Error(EFP.missingSupervisor)
+      else if (!supervisors) throw new Error(EFP.missingSupervisor)
 
       const newProject = new ProjectsModel({
         code,
@@ -79,7 +79,7 @@ class Projects {
         description,
         idCompany,
         status  : 'active',
-        supervisor
+        supervisors
       })
       const result = await newProject.save()
 
@@ -108,7 +108,7 @@ class Projects {
       description,
       id,
       status,
-      supervisor
+      supervisors
     } = this._args as DtoProjects
 
     try {
@@ -117,7 +117,7 @@ class Projects {
       else if (new Date(deadline).toString() === 'Invalid Date')
         throw new Error(GEM.invalidDate)
       else if (!description) throw new Error(GEM.missingDescription)
-      else if (!supervisor) throw new Error(EFP.missingSupervisor)
+      else if (!supervisors) throw new Error(EFP.missingSupervisor)
       else if (!status) throw new Error(GEM.missingStatus)
       else if (!STATUS_NAMES.includes(status as string))
         throw new Error(GEM.statusNotAllowed)
@@ -130,7 +130,7 @@ class Projects {
           description,
           id,
           status,
-          supervisor
+          supervisors
         },
         {
           new: true

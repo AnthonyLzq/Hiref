@@ -2,10 +2,10 @@ import { Schema } from 'mongoose'
 import { CommonDataForProjectsTasksAndJobOffers } from './commonDataForProjectsTasksAndJobOffers'
 
 const extendSchema = (
-  schemaToExtend: Schema,
+  schemaToExtend : Schema,
   availableStatus: string[]
-  ): Schema => {
-  const CommonDataForProjectsAndJobOffersWithStatus = new Schema ({
+): Schema => {
+  const CommonDataForProjectsAndJobOffersWithStatus = new Schema({
     ...CommonDataForProjectsTasksAndJobOffers.obj,
     status: {
       enum    : availableStatus,

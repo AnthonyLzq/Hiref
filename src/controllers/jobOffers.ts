@@ -44,6 +44,8 @@ class JobOffers {
         return this._getAllForAspirant()
       case 'getAllForEvaluator':
         return this._getAllForEvaluator()
+      case 'postulation':
+        return this._postulation()
       case 'store':
         return this._store()
       case 'update':
@@ -252,8 +254,31 @@ class JobOffers {
     }
   }
 
+  private async _postulation ():  Promise<IJobOffers | null> {
+    const { id, applicants } = this._args as DtoJobOffers
+
+    try {
+      if (!applicants) throw new Error(EFJ.missingApplicants)
+
+      const updatedOffer = await JobOffersModel.findByIdAndUpdate(
+        id,
+        { $push: { applicants: (applicants as string[])[0] } },
+        { new: true }
+      )
+
+      return updatedOffer
+    } catch (error) {
+      if (error.message === EFJ.missingApplicants) throw error
+      else {
+        console.error(error)
+        throw new Error(EFJ.problemAllowingTheUserPostulate)
+      }
+    }
+  }
+
   private async _update (): Promise<IJobOffers | null> {
     const {
+      applicants,
       code,
       deadline,
       description,
@@ -275,20 +300,39 @@ class JobOffers {
       else if (!STATUS_NAMES.includes(status))
         throw new Error(GEM.statusNotAllowed)
 
-      const updatedJobOffer = await JobOffersModel.findByIdAndUpdate(
-        id as string,
-        {
-          code,
-          deadline: new Date(deadline),
-          description,
-          occupations,
-          roles,
-          status
-        },
-        {
-          new: true
-        }
-      )
+      let updatedJobOffer: IJobOffers | null
+
+      if (!applicants)
+        updatedJobOffer = await JobOffersModel.findByIdAndUpdate(
+          id as string,
+          {
+            code,
+            deadline: new Date(deadline),
+            description,
+            occupations,
+            roles,
+            status
+          },
+          {
+            new: true
+          }
+        )
+      else
+        updatedJobOffer = await JobOffersModel.findByIdAndUpdate(
+          id as string,
+          {
+            applicants,
+            code,
+            deadline: new Date(deadline),
+            description,
+            occupations,
+            roles,
+            status
+          },
+          {
+            new: true
+          }
+        )
 
       return updatedJobOffer
     } catch (error) {
@@ -311,7 +355,7 @@ class JobOffers {
     }
   }
 
-  private async _updateStatus () {
+  private async _updateStatus (): Promise<IJobOffers | null> {
     const { id, status } = this._args as DtoJobOffers
 
     try {

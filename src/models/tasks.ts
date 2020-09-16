@@ -5,29 +5,22 @@ import { extendSchema } from './utils/extendTaskSchema'
 interface ITasks extends ICommonDataForProjectsTasksAndJobOffers {
   idProject        : Schema.Types.ObjectId
   responsible      : string[]
-  responsibleNumber: number
   status           : string
   subTasks?        : string[]
 }
 
-const TasksSchemaToExtend = new Schema(
-  {
-    idProject: {
-      ref     : 'projects',
-      required: true,
-      type    : Schema.Types.ObjectId
-    },
-    responsible: {
-      required: true,
-      type    : [String]
-    },
-    responsibleNumber: {
-      required: true,
-      type    : Number
-    },
-    subTasks: [String]
-  }
-)
+const TasksSchemaToExtend = new Schema({
+  idProject: {
+    ref     : 'projects',
+    required: true,
+    type    : Schema.Types.ObjectId
+  },
+  responsible: {
+    required: true,
+    type    : [String]
+  },
+  subTasks: [String]
+})
 
 const Tasks = extendSchema(TasksSchemaToExtend)
 

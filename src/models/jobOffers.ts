@@ -2,6 +2,7 @@ import { model, Schema } from 'mongoose'
 import { ICommonDataForProjectsTasksAndJobOffers } from './utils/commonDataForProjectsTasksAndJobOffers'
 import { IRoles } from '../dto-interfaces/jobOffers.dto'
 import { extendSchema } from './utils/extendProjectsAndJobOffersSchema'
+import { Information as InformationSchema } from './utils/information'
 
 const STATUS_NAMES = ['published', 'inEvaluation', 'rePublished', 'completed', 'canceled']
 
@@ -12,9 +13,9 @@ interface IJobOffers extends ICommonDataForProjectsTasksAndJobOffers {
 }
 
 const Roles = new Schema({
-  name: {
+  description: {
     required: true,
-    type    : String
+    type    : InformationSchema
   },
   quantity: {
     required: true,
@@ -26,29 +27,25 @@ const Roles = new Schema({
   }
 })
 
-const JobOffersToExtend = new Schema(
-  {
-    idProject: {
-      ref     : 'projects',
-      required: true,
-      type    : Schema.Types.ObjectId
-    },
-    occupations: {
-      required: true,
-      type    : [String]
-    },
-    roles: {
-      required: true,
-      type    : [Roles]
-    }
+const JobOffersToExtend = new Schema({
+  applicants: {
+    required: false,
+    type    : [String]
   },
-  {
-    timestamps: {
-      createdAt: true,
-      updatedAt: true
-    }
+  idProject: {
+    ref     : 'projects',
+    required: true,
+    type    : Schema.Types.ObjectId
+  },
+  occupations: {
+    required: true,
+    type    : [String]
+  },
+  roles: {
+    required: true,
+    type    : [Roles]
   }
-)
+})
 
 const JobOffers = extendSchema(JobOffersToExtend, STATUS_NAMES)
 
