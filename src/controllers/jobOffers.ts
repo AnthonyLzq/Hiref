@@ -204,8 +204,7 @@ class JobOffers {
       description,
       idProject,
       occupations,
-      roles,
-      status
+      roles
     } = this._args as DtoJobOffers
 
     try {
@@ -217,9 +216,6 @@ class JobOffers {
       else if (!idProject) throw new Error(GEM.missingIdProject)
       else if (!occupations) throw new Error(EFJ.missingOccupations)
       else if (!roles) throw new Error(EFJ.missingRoles)
-      else if (!status) throw new Error(GEM.missingStatus)
-      else if (!STATUS_NAMES.includes(status))
-        throw new Error(GEM.statusNotAllowed)
 
       const newJobOffer = new JobOffersModel({
         code,
@@ -228,7 +224,7 @@ class JobOffers {
         idProject,
         occupations,
         roles,
-        status
+        status  : 'published'
       })
       const result = await newJobOffer.save()
 
@@ -243,7 +239,6 @@ class JobOffers {
         error.message === GEM.missingIdProject ||
         error.message === EFJ.missingOccupations ||
         error.message === EFJ.missingRoles ||
-        error.message === GEM.missingStatus ||
         error.message === GEM.statusNotAllowed
       )
         throw error
