@@ -1,5 +1,16 @@
 # Hiref
 
+## Version 0.12.2
+
+- Fixed:
+  - `/jobOffers/getAll/byProject/:idProject` endpoint didn't produce any result.
+  - Type `Schema.Type.ObjectId` changed to `Type.ObjectId`.
+- Pending:
+  - To return the name of the company from firebase.
+  - To create two endpoints:
+    - Get all supervisors (firebase).
+    - Get all supervisors per project (firebase).
+
 ## Version 0.12.1
 
 - Fixed:

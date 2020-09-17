@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose'
+import { model, Schema, Types } from 'mongoose'
 import { ICommonDataForProjectsTasksAndJobOffers } from './utils/commonDataForProjectsTasksAndJobOffers'
 import { IRoles } from '../dto-interfaces/jobOffers.dto'
 import { extendSchema } from './utils/extendProjectsAndJobOffersSchema'
@@ -7,7 +7,7 @@ import { Information as InformationSchema } from './utils/information'
 const STATUS_NAMES = ['published', 'inEvaluation', 'rePublished', 'completed', 'canceled']
 
 interface IJobOffers extends ICommonDataForProjectsTasksAndJobOffers {
-  idProject  : Schema.Types.ObjectId
+  idProject  : Types.ObjectId
   occupations: string[]
   roles      : IRoles[]
 }

@@ -1,9 +1,9 @@
-import { model, Schema } from 'mongoose'
+import { model, Schema, Types } from 'mongoose'
 import { ICommonDataForProjectsTasksAndJobOffers } from './utils/commonDataForProjectsTasksAndJobOffers'
 import { extendSchema } from './utils/extendTaskSchema'
 
 interface ITasks extends ICommonDataForProjectsTasksAndJobOffers {
-  idProject        : Schema.Types.ObjectId
+  idProject        : Types.ObjectId
   responsible      : string[]
   status           : string
   subTasks?        : string[]

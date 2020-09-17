@@ -1,5 +1,5 @@
 /* eslint-disable max-len, @typescript-eslint/naming-convention, no-extra-parens */
-import { Schema } from 'mongoose'
+import { Types } from 'mongoose'
 import { DtoJobOffers, IRoles } from '../dto-interfaces/jobOffers.dto'
 import { IInformation } from '../dto-interfaces/utils/informationInterface'
 import { IJobOffers, JobOffersModel, STATUS_NAMES } from '../models/jobOffers'
@@ -89,7 +89,7 @@ class JobOffers {
 
     try {
       const jobOffers = await JobOffersModel.find({
-        idProject: new Schema.Types.ObjectId(idProject as string)
+        idProject: new Types.ObjectId(idProject as string)
       })
 
       return jobOffers
@@ -121,10 +121,10 @@ class JobOffers {
   }> {
     const { accepted, occupations, rejected } = this._args as DtoJobOffers
     const acceptedIds = (accepted as string[]).map(
-      (id: string) => new Schema.Types.ObjectId(id)
+      (id: string) => new Types.ObjectId(id)
     )
     const rejectedIds = (rejected as string[]).map(
-      (id: string) => new Schema.Types.ObjectId(id)
+      (id: string) => new Types.ObjectId(id)
     )
     const acceptedAndRejectedIds = [...acceptedIds, ...rejectedIds]
     try {
@@ -167,10 +167,10 @@ class JobOffers {
   }> {
     const { completed, inEvaluation } = this._args as DtoJobOffers
     const completedIds = (completed as string[]).map(
-      (id: string) => new Schema.Types.ObjectId(id)
+      (id: string) => new Types.ObjectId(id)
     )
     const inEvaluationIds = (inEvaluation as string[]).map(
-      (id: string) => new Schema.Types.ObjectId(id)
+      (id: string) => new Types.ObjectId(id)
     )
     const completedAndInEvaluationIds = [...completedIds, ...inEvaluationIds]
     try {

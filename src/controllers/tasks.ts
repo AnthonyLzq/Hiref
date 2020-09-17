@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose'
+import { Types } from 'mongoose'
 import { DtoTasks } from '../dto-interfaces/tasks.dto'
 import { ITasks, TasksModel } from '../models/tasks'
 import { ErrorMessagesForTasksController as EFT, GeneralErrorMessages as GEM } from './errors/errors.messages'
@@ -45,7 +45,7 @@ class Tasks {
     const { idProject } = this._args as DtoTasks
     try {
       const tasks = await TasksModel.find({
-        idProject: new Schema.Types.ObjectId(idProject as string)
+        idProject: new Types.ObjectId(idProject as string)
       })
 
       return tasks
