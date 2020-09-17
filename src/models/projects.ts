@@ -5,8 +5,8 @@ import { extendSchema } from './utils/extendProjectsAndJobOffersSchema'
 const STATUS_NAMES = ['active', 'completed', 'canceled']
 
 interface IProjects extends ICommonDataForProjectsTasksAndJobOffers {
-  idCompany : string
-  supervisor: string[]
+  idCompany  : string
+  supervisors: string[]
 }
 
 const ProjectsToExtend = new Schema({

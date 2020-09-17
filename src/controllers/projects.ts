@@ -22,6 +22,8 @@ class Projects {
         return this._getAllByStatus()
       case 'getOneById':
         return this._getOneById()
+      case 'getSupervisorsIdByProject':
+        return this._getSupervisorsByProject()
       case 'store':
         return this._store()
       case 'update':
@@ -65,6 +67,22 @@ class Projects {
       if (!project) throw new Error(EFP.projectDoesNoExists)
 
       return project
+    } catch (error) {
+      if (error.message === EFP.projectDoesNoExists) throw error
+
+      console.error(error)
+      throw new Error(EFP.problemGettingOneById)
+    }
+  }
+
+  private async _getSupervisorsByProject (): Promise<IProjects | null>{
+    const { id } = this._args as DtoProjects
+    try {
+      const supervisorIds = await ProjectsModel.findById(id as string, '-_id supervisors')
+
+      if (!supervisorIds) throw new Error(EFP.projectDoesNoExists)
+
+      return supervisorIds
     } catch (error) {
       if (error.message === EFP.projectDoesNoExists) throw error
 
