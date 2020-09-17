@@ -20,7 +20,7 @@ JobOffers.route('/jobOffers/')
     }
   })
 
-JobOffers.route('/jobOffers/:idProject/')
+JobOffers.route('/jobOffers/store/:idProject/')
   .post(async (req: Request, res: Response): Promise<void> => {
     const { body: { args }, params: { idProject } } = req
     const joc = new JobOffersC({
@@ -36,7 +36,7 @@ JobOffers.route('/jobOffers/:idProject/')
     }
   })
 
-JobOffers.route('/jobOffers/:idJobOffer/')
+JobOffers.route('/jobOffers/update/:idJobOffer/')
   .patch(async (req: Request, res: Response): Promise<void> => {
     const { body: { args }, params: { idJobOffer }, query } = req
     let joc   : JobOffersC
@@ -83,7 +83,7 @@ JobOffers.route('/jobOffers/:idJobOffer/')
     }
   })
 
-JobOffers.route('/jobOffers/getAllByProject/:idProject')
+JobOffers.route('/jobOffers/getAll/byProject/:idProject/')
   .get(async (req: Request, res: Response): Promise<void> => {
     const { params: { idProject } } = req
     const joc = new JobOffersC({
@@ -98,7 +98,7 @@ JobOffers.route('/jobOffers/getAllByProject/:idProject')
     }
   })
 
-JobOffers.route('/jobOffers/getAllByOccupations/')
+JobOffers.route('/jobOffers/getAll/byOccupations/')
   .post(async (req: Request, res: Response): Promise<void> => {
     const { body: { args } } = req
     const joc = new JobOffersC(args as DtoJobOffers)
@@ -111,7 +111,7 @@ JobOffers.route('/jobOffers/getAllByOccupations/')
     }
   })
 
-JobOffers.route('/jobOffers/getAllForAspirant/')
+JobOffers.route('/jobOffers/getAll/forAspirant/')
   .post(async (req: Request, res: Response): Promise<void> => {
     const { body: { args } } = req
     const joc = new JobOffersC(args as DtoJobOffers)
@@ -124,7 +124,7 @@ JobOffers.route('/jobOffers/getAllForAspirant/')
     }
   })
 
-JobOffers.route('/jobOffers/getAllForEvaluator/')
+JobOffers.route('/jobOffers/getAll/forEvaluator/')
   .post(async (req: Request, res: Response): Promise<void> => {
     const { body: { args } } = req
     const joc = new JobOffersC(args as DtoJobOffers)
@@ -137,7 +137,7 @@ JobOffers.route('/jobOffers/getAllForEvaluator/')
     }
   })
 
-JobOffers.route('/jobOffers/:idJobOffer/')
+JobOffers.route('/jobOffers/delete/:idJobOffer/')
   .delete(async (req: Request, res: Response): Promise<void> => {
     const { params: { idJobOffer } } = req
     const joc = new JobOffersC({ id: idJobOffer as string } as DtoJobOffers)

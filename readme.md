@@ -120,14 +120,14 @@ There are sixteen endpoints implemented:
      }
      ```
 
-3. Update project: `/projects/:idProject/`, it has a patch method. Here are some examples:
+3. Update project: `/projects/update/:idProject/`, it has a patch method. Here are some examples:
 
    - You can send a patch request with a query or without it, if you send the request without the query, then you have to send the same payload shown [here](#project-payload), adding the field `status` in the "args", but with the updated information.</br>
      It will return you the same response shown [here](#one-project-response), but with the project that has been updated.
 
    - If you send the request with a query like this `?status=`, then payload is no longer need it, and the response the same that was shown [here](#one-project-response), but with the status updated. Remember that there are only three status allowed as it is shown [here](#status).
 
-4. Tasks from a project: `/task/:idProject/`, it has a get and a post method. Here are some examples:
+4. Tasks from a project: `/task/delete/:idProject/`, it has a get and a post method. Here are some examples:
 
    - If you send a get request, then you will get all the tasks from the request project from the requested company. <a id="tasks-response"></a>The response will be as follows:
 
@@ -272,7 +272,7 @@ There are sixteen endpoints implemented:
    }
    ```
 
-9. Store a job offer for a project: `/jobOffers/:idProject/`, it has a post method. It will store a job offer for a determined project. <a id="jobOffer-payload"></a>You need a payload as follows or you will get an [error](#error):
+9. Store a job offer for a project: `/jobOffers/store/:idProject/`, it has a post method. It will store a job offer for a determined project. <a id="jobOffer-payload"></a>You need a payload as follows or you will get an [error](#error):
 
    ```json
    {
@@ -300,7 +300,7 @@ There are sixteen endpoints implemented:
 
    By default, all the job offers status will be stored as published. It can't be changed unless an update or update status is performed.
 
-10. Update a job offer: `/jobOffers/:idJobOffer/`, it has a patch method, here are some examples:
+10. Update a job offer: `/jobOffers/update/:idJobOffer/`, it has a patch method, here are some examples:
 
     - You can send the request with a query or without it, if you send the request without, then you need the same payload that is shown [here](#jobOffer-payload), adding the field `status` in the "args". <a id="status-for-jobOffers"></a>Remember that only the following status are allowed: published, inEvaluation, rePublished, completed and canceled. <a id="one-jobOffer-response"></a> You will get a response as follows:
 
@@ -339,9 +339,9 @@ There are sixteen endpoints implemented:
 
     - If you send the request with a query like this `?status=`, then a payload is no longer need it, and you will get the same response shown [here](#one-jobOffer-response), but with the status updated.
 
-11. Get all the job offers by project: `/jobOffers/getAllByProject/:idProject`, it has a get method. If you send the request, then you will get the same response shown [here](#jobOffers-response), those who belongs to the requested project.
+11. Get all the job offers by project: `/jobOffers/getAll/byProject/:idProject`, it has a get method. If you send the request, then you will get the same response shown [here](#jobOffers-response), those who belongs to the requested project.
 
-12. Get all the job offers by occupations `/jobOffers/getAllByOccupations/`, it has a post method. You need the following payload or you will get an [error](#error):
+12. Get all the job offers by occupations `/jobOffers/getAll/byOccupations/`, it has a post method. You need the following payload or you will get an [error](#error):
 
     ```json
     {
@@ -353,7 +353,7 @@ There are sixteen endpoints implemented:
 
     The response will be the same shown [here](#jobOffers-response), but with the job offers that has those occupations.
 
-13. Get all the job offers by aspirant: `/jobOffers/getAllForAspirant/`, it has a post method. If you send the request. You need the following payload or you will get an [error](#error):
+13. Get all the job offers by aspirant: `/jobOffers/getAll/forAspirant/`, it has a post method. If you send the request. You need the following payload or you will get an [error](#error):
 
     ```json
     {
@@ -473,7 +473,7 @@ There are sixteen endpoints implemented:
     }
     ```
 
-14. Get all the job offers for the evaluator: `/jobOffers/getAllForEvaluator/`, it has a post method. If you send the request. You need the following payload or you will get an [error](#error):
+14. Get all the job offers for the evaluator: `/jobOffers/getAll/forEvaluator/`, it has a post method. If you send the request. You need the following payload or you will get an [error](#error):
 
     ```json
     {
@@ -593,7 +593,7 @@ There are sixteen endpoints implemented:
     }
     ```
 
-15. Delete a job offer: `/jobOffers/:idJobOffer/`, it has a delete method. If you send the request, then the request job offer will be deleted from the database. You will get the same response shown [here](#one-jobOffer-response), but with the data of the deleted job offer.
+15. Delete a job offer: `/jobOffers/delete/:idJobOffer/`, it has a delete method. If you send the request, then the request job offer will be deleted from the database. You will get the same response shown [here](#one-jobOffer-response), but with the data of the deleted job offer.
 
 16. Postulate to a job offer: `/jobOffers/postulate/:idJobOffer/`, it has a post method. If you send the request. You need the following payload or you will get an [error](#error):
 

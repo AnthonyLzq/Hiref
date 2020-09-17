@@ -4,7 +4,11 @@ import { CommonDataForProjectsTasksAndJobOffers } from './commonDataForProjectsT
 const extendSchema = (schemaToExtend: Schema): Schema => {
   return new Schema({
     ...CommonDataForProjectsTasksAndJobOffers.obj,
-    ...schemaToExtend.obj
+    ...schemaToExtend.obj,
+    status: {
+      required: true,
+      type    : String
+    }
   })
 }
 

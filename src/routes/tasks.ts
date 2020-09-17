@@ -74,7 +74,7 @@ Tasks.route('/tasks/:idProject/:idTask/')
     }
   })
 
-Tasks.route('/task/:idTask/')
+Tasks.route('/task/delete/:idTask/')
   .delete(async (req: Request, res: Response): Promise<void> => {
     const { params: { idTask } } = req
     const tc = new TasksC({ id: idTask as string })

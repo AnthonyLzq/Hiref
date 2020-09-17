@@ -50,7 +50,7 @@ Projects.route('/projects/:idCompany/')
     }
   })
 
-Projects.route('/projects/:idProject/')
+Projects.route('/projects/update/:idProject/')
   .patch(async (req: Request, res: Response): Promise<void> => {
     const { body: { args }, params: { idProject }, query } = req
     let pc    : ProjectsC

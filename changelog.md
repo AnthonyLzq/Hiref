@@ -1,5 +1,17 @@
 # Hiref
 
+## Version 0.11.1
+
+- Fixed:
+  - Status field to the tasks.
+  - Endpoints.
+- Pending:
+  - To return the name of the company from firebase.
+  - To create three endpoints:
+    - Get all supervisors (firebase).
+    - Get all supervisors per project (firebase).
+    - Get all the clients (companies, from firebase).
+
 ## Version 0.11.0
 
 - Implemented:
