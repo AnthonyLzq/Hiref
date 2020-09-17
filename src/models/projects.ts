@@ -10,6 +10,11 @@ interface IProjects extends ICommonDataForProjectsTasksAndJobOffers {
 }
 
 const ProjectsToExtend = new Schema({
+  code: {
+    required: false,
+    type    : String,
+    unique  : true
+  },
   idCompany: {
     required: true,
     type    : String

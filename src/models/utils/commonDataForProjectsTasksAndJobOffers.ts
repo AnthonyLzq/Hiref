@@ -11,11 +11,6 @@ interface ICommonDataForProjectsTasksAndJobOffers extends Document {
 
 const CommonDataForProjectsTasksAndJobOffers = new Schema(
   {
-    code: {
-      required: false,
-      type    : String,
-      unique  : true
-    },
     deadline: {
       required: true,
       type    : Date
