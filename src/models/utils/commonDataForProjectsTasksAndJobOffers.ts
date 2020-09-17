@@ -18,7 +18,7 @@ const CommonDataForProjectsTasksAndJobOffers = new Schema(
     },
     deadline: {
       required: true,
-      type    : String
+      type    : Date
     },
     description: {
       required: true,

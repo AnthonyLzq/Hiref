@@ -59,6 +59,7 @@ There are sixteen endpoints implemented:
          "result": [
            {
              "_id": "Project MongoDB id",
+             "createdAt": "Iso date",
              "code": "Project id for the company",
              "createdAt": "Iso date",
              "deadline": "Iso date",
@@ -70,7 +71,8 @@ There are sixteen endpoints implemented:
              "supervisors": [
                "Supervisor_1 Firebase id",
                "Supervisor_2 Firebase id"
-             ]
+             ],
+             "updatedAt": "Iso date"
            }
          ]
        }
@@ -102,8 +104,9 @@ There are sixteen endpoints implemented:
        "message": {
          "result": {
            "_id": "Project MongoDB id",
+           "createdAt": "Iso date",
            "code": "Company code for the project",
-           "deadline": "YEAR-MONTH-DAY",
+           "deadline": "Iso date",
            "description": {
              "content": "Project description",
              "title": "Project name"
@@ -112,7 +115,8 @@ There are sixteen endpoints implemented:
            "supervisors": [
              "Supervisor_1 Firebase id",
              "Supervisor_2 Firebase id"
-           ]
+           ],
+           "updatedAt": "Iso date"
          }
        }
      }
@@ -136,6 +140,7 @@ There are sixteen endpoints implemented:
          "result": [
            {
              "_id": "Task MongoDB id",
+             "createdAt": "Iso date",
              "deadline": "Iso date",
              "description": {
                "content": "Task content",
@@ -147,7 +152,8 @@ There are sixteen endpoints implemented:
                "Responsible_2 Firebase id"
              ],
              "status": "Task status",
-             "subTasks": ["Sub task 1", "Sub task 2"]
+             "subTasks": ["Sub task 1", "Sub task 2"],
+             "updatedAt": "Iso date"
            }
          ]
        }
@@ -182,6 +188,7 @@ There are sixteen endpoints implemented:
        "message": {
          "result": {
            "_id": "Task MongoDB id",
+           "createdAt": "Iso date",
            "deadline": "Iso date",
            "description": {
              "content": "Task content",
@@ -193,7 +200,8 @@ There are sixteen endpoints implemented:
              "Responsible_2 Firebase id"
            ],
            "status": "Task status",
-           "subTasks": ["Sub task 1", "Sub task 2"]
+           "subTasks": ["Sub task 1", "Sub task 2"],
+           "updatedAt": "Iso date"
          }
        }
      }
@@ -240,8 +248,9 @@ There are sixteen endpoints implemented:
        "result": [
          {
            "_id": "Mongo job offer id",
+           "createdAt": "Iso date",
            "code": "Company code for the job offer.",
-           "deadline": "YEAR-MONTH-DAY",
+           "deadline": "Iso date",
            "description": {
              "content": "Job offer content.",
              "title": "Job offer title"
@@ -263,7 +272,8 @@ There are sixteen endpoints implemented:
                "remuneration": 930
              }
            ],
-           "status": "Job offer status."
+           "status": "Job offer status.",
+           "updatedAt": "Iso date"
          }
        ]
      }
@@ -307,8 +317,9 @@ There are sixteen endpoints implemented:
         "error": false,
         "message": {
           "result": {
+            "createdAt": "Iso date",
             "code": "Updated company code for the job offer.",
-            "deadline": "YEAR-MONTH-DAY",
+            "deadline": "Iso date",
             "description": {
               "content": "Updated job offer content.",
               "title": "Updated job offer title"
@@ -329,7 +340,8 @@ There are sixteen endpoints implemented:
                 "remuneration": 930
               }
             ],
-            "status": "Updated job offer status."
+            "status": "Updated job offer status.",
+            "updatedAt": "Iso date"
           }
         }
       }
@@ -364,10 +376,7 @@ There are sixteen endpoints implemented:
           "Job offer id rejected 1",
           "Job offer id rejected 2"
         ],
-        "occupations": [
-          "Occupation 1",
-          "Occupation 2"
-        ]
+        "occupations": ["Occupation 1", "Occupation 2"]
       }
     }
     ```
@@ -382,8 +391,10 @@ There are sixteen endpoints implemented:
           "acceptedJobOffers": [
             {
               "_id": "Mongo job offer id",
+              "createdAt": "Iso date",
+
               "code": "Company code of the accepted job offer.",
-              "deadline": "YEAR-MONTH-DAY",
+              "deadline": "Iso date",
               "description": {
                 "content": "Content of the accepted job offer.",
                 "title": "Title of the accepted job offer."
@@ -405,14 +416,17 @@ There are sixteen endpoints implemented:
                   "remuneration": 930
                 }
               ],
-              "status": "Status of the accepted job offer."
+              "status": "Status of the accepted job offer.",
+              "updatedAt": "Iso date"
             }
           ],
           "availableJobOffers": [
             {
               "_id": "Mongo job offer id",
+              "createdAt": "Iso date",
+
               "code": "Company code of the available job offer.",
-              "deadline": "YEAR-MONTH-DAY",
+              "deadline": "Iso date",
               "description": {
                 "content": "Content of the available job offer.",
                 "title": "Title of the available job offer."
@@ -434,14 +448,17 @@ There are sixteen endpoints implemented:
                   "remuneration": 930
                 }
               ],
-              "status": "Status of the available job offer."
+              "status": "Status of the available job offer.",
+              "updatedAt": "Iso date"
             }
           ],
           "rejectedJobOffers": [
             {
               "_id": "Mongo job offer id",
+              "createdAt": "Iso date",
+
               "code": "Company code of the rejected job offer.",
-              "deadline": "YEAR-MONTH-DAY",
+              "deadline": "Iso date",
               "description": {
                 "content": "Content of the rejected job offer.",
                 "title": "Title of the rejected job offer."
@@ -463,7 +480,8 @@ There are sixteen endpoints implemented:
                   "remuneration": 930
                 }
               ],
-              "status": "Status of the rejected job offer."
+              "status": "Status of the rejected job offer.",
+              "updatedAt": "Iso date"
             }
           ]
         }
@@ -498,8 +516,9 @@ There are sixteen endpoints implemented:
           "availableJobOffers": [
             {
               "_id": "Mongo job offer id",
+              "createdAt": "Iso date",
               "code": "Company code of the available job offer.",
-              "deadline": "YEAR-MONTH-DAY",
+              "deadline": "Iso date",
               "description": {
                 "content": "Content of the available job offer.",
                 "title": "Title of the available job offer."
@@ -521,14 +540,16 @@ There are sixteen endpoints implemented:
                   "remuneration": 930
                 }
               ],
-              "status": "Status of the available job offer."
+              "status": "Status of the available job offer.",
+              "updatedAt": "Iso date"
             }
           ],
           "completedJobOffers": [
             {
               "_id": "Mongo job offer id",
+              "createdAt": "Iso date",
               "code": "Company code of the completed job offer.",
-              "deadline": "YEAR-MONTH-DAY",
+              "deadline": "Iso date",
               "description": {
                 "content": "Content of the completed job offer.",
                 "title": "Title of the completed job offer."
@@ -550,14 +571,16 @@ There are sixteen endpoints implemented:
                   "remuneration": 930
                 }
               ],
-              "status": "Status of the completed job offer."
+              "status": "Status of the completed job offer.",
+              "updatedAt": "Iso date"
             }
           ],
           "inEvaluationJobOffers": [
             {
               "_id": "Mongo job offer id",
+              "createdAt": "Iso date",
               "code": "Company code of the inEvaluation job offer.",
-              "deadline": "YEAR-MONTH-DAY",
+              "deadline": "Iso date",
               "description": {
                 "content": "Content of the inEvaluation job offer.",
                 "title": "Title of the inEvaluation job offer."
@@ -579,7 +602,8 @@ There are sixteen endpoints implemented:
                   "remuneration": 930
                 }
               ],
-              "status": "Status of the inEvaluation job offer."
+              "status": "Status of the inEvaluation job offer.",
+              "updatedAt": "Iso date"
             }
           ]
         }
@@ -614,23 +638,23 @@ There are sixteen endpoints implemented:
 17. Get all the users: `/users/`, it has a get method. You have to send the request with a query like this `?type=`, if you don't send the request with a query, you will an [error](#error).
 
     - `?type=clients`: it will give you all the clients stored in firebase, you will get a response as follows:
-        ```json
-        {
-          "error": false,
-          "message": {
-            "result": [
-              {
-                "id": "BEkuhoLp1rPiZwco46FKaIha8PP2",
-                "role": "client",
-                "commercial_name": "Client 2",
-                "ruc": "12345678",
-                "business_name": "Client business name 2",
-                "email": "client2@test.com"
-              }
-            ]
-          }
+      ```json
+      {
+        "error": false,
+        "message": {
+          "result": [
+            {
+              "id": "BEkuhoLp1rPiZwco46FKaIha8PP2",
+              "role": "client",
+              "commercial_name": "Client 2",
+              "ruc": "12345678",
+              "business_name": "Client business name 2",
+              "email": "client2@test.com"
+            }
+          ]
         }
-        ```
+      }
+      ```
 
 ### Notes
 

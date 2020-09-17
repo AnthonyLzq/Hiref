@@ -1,5 +1,17 @@
 # Hiref
 
+## Version 0.12.1
+
+- Fixed:
+  - Now dates are stored as dates, not as strings.
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+  - Error message when a request is wrong.
+- Pending:
+  - To return the name of the company from firebase.
+  - To create two endpoints:
+    - Get all supervisors (firebase).
+    - Get all supervisors per project (firebase).
+
 ## Version 0.12.0
 
 - Implemented:
