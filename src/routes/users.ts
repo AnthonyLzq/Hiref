@@ -18,6 +18,10 @@ Users.route('/users/')
           result = await c.process('getAllClients')
           response(false, { result }, res, 200)
           break
+        case 'supervisor':
+          result = await c.process('getAllSupervisors')
+          response(false, { result }, res, 200)
+          break
         default:
           response(true, 'Request not allowed', res, 500)
       }
