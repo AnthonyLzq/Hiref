@@ -410,14 +410,8 @@ There are sixteen endpoints implemented:
     ```json
     {
       "args": {
-        "acceptedJobOffers": [
-          "Job offer id accepted 1",
-          "Job offer id accepted 2"
-        ],
-        "rejectedJobOffers": [
-          "Job offer id rejected 1",
-          "Job offer id rejected 2"
-        ],
+        "accepted": ["Job offer id accepted 1", "Job offer id accepted 2"],
+        "rejected": ["Job offer id rejected 1", "Job offer id rejected 2"],
         "occupations": ["Occupation 1", "Occupation 2"]
       }
     }
@@ -498,7 +492,6 @@ There are sixteen endpoints implemented:
             {
               "_id": "Mongo job offer id",
               "createdAt": "Iso date",
-
               "code": "Company code of the rejected job offer.",
               "deadline": "Iso date",
               "description": {
@@ -536,11 +529,8 @@ There are sixteen endpoints implemented:
     ```json
     {
       "args": {
-        "completedJobOffers": [
-          "Job offer id completed 1",
-          "Job offer id completed 2"
-        ],
-        "inEvaluationJobOffers": [
+        "completed": ["Job offer id completed 1", "Job offer id completed 2"],
+        "inEvaluation": [
           "Job offer id in evaluation 1",
           "Job offer id in evaluation 2"
         ]

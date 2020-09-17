@@ -119,6 +119,7 @@ class JobOffers {
     availableJobOffers: IJobOffers[]
     rejectedJobOffers : IJobOffers[]
   }> {
+    console.log(this._args)
     const { accepted, occupations, rejected } = this._args as DtoJobOffers
     /*
      * jobOffers:
@@ -127,8 +128,9 @@ class JobOffers {
      * - 2: Rejected job offers.
      */
     try {
-      if (!occupations) throw new Error(EFJ.missingOccupations)
-      let jobOffers: IJobOffers[][]
+      if (!occupations || (occupations as string[]).length === 0)
+        throw new Error(EFJ.missingOccupations)
+      let jobOffers: IJobOffers[][] | IJobOffers[] | null
 
       if (
         (accepted as string[]).length > 0 &&
@@ -212,7 +214,16 @@ class JobOffers {
           rejectedJobOffers : jobOffers[1]
         }
       }
-      throw new Error(EFJ.missingOccupations)
+
+      jobOffers = await JobOffersModel.find({
+        occupations: { $in: occupations as string[] }
+      })
+
+      return {
+        acceptedJobOffers : [],
+        availableJobOffers: jobOffers,
+        rejectedJobOffers : []
+      }
     } catch (error) {
       if (error.message === EFJ.missingOccupations) throw error
 
@@ -234,7 +245,7 @@ class JobOffers {
     * - 2: In evaluation job offers.
     */
     try {
-      let jobOffers: IJobOffers[][]
+      let jobOffers: IJobOffers[][] | IJobOffers[] | null
       if (
         (completed as string[]).length > 0 &&
         (inEvaluation as string[]).length > 0
@@ -247,9 +258,24 @@ class JobOffers {
         )
         const completedAndInEvaluationIds = [...completedIds, ...inEvaluationIds]
         jobOffers = await Promise.all([
-          JobOffersModel.find({ _id: { $in: completedAndInEvaluationIds } }),
-          JobOffersModel.find({ _id: { $in: completedIds } }),
-          JobOffersModel.find({ _id: { $in: inEvaluationIds } })
+          JobOffersModel.find(
+            {
+              $or: [{ status: 'published' }, { status: 'rePublished' }],
+              _id: { $in: completedAndInEvaluationIds }
+            }
+          ),
+          JobOffersModel.find(
+            {
+              $or: [{ status: 'published' }, { status: 'rePublished' }],
+              _id: { $in: completedIds }
+            }
+          ),
+          JobOffersModel.find(
+            {
+              $or: [{ status: 'published' }, { status: 'rePublished' }],
+              _id: { $in: inEvaluationIds }
+            }
+          )
         ])
 
         return {
@@ -263,8 +289,18 @@ class JobOffers {
           (id: string) => new Types.ObjectId(id)
         )
         jobOffers = await Promise.all([
-          JobOffersModel.find({ _id: { $nin: completedIds } }),
-          JobOffersModel.find({ _id: { $in: completedIds } })
+          JobOffersModel.find(
+            {
+              $or: [{ status: 'published' }, { status: 'rePublished' }],
+              _id: { $nin: completedIds }
+            }
+          ),
+          JobOffersModel.find(
+            {
+              $or: [{ status: 'published' }, { status: 'rePublished' }],
+              _id: { $in: completedIds }
+            }
+          )
         ])
 
         return {
@@ -278,8 +314,18 @@ class JobOffers {
           (id: string) => new Types.ObjectId(id)
         )
         jobOffers = await Promise.all([
-          JobOffersModel.find({ _id: { $nin: inEvaluationIds } }),
-          JobOffersModel.find({ _id: { $in: inEvaluationIds } })
+          JobOffersModel.find(
+            {
+              $or: [{ status: 'published' }, { status: 'rePublished' }],
+              _id: { $nin: inEvaluationIds }
+            }
+          ),
+          JobOffersModel.find(
+            {
+              $or: [{ status: 'published' }, { status: 'rePublished' }],
+              _id: { $in: inEvaluationIds }
+            }
+          )
         ])
 
         return {
@@ -288,7 +334,16 @@ class JobOffers {
           inEvaluationJobOffers: jobOffers[1]
         }
       }
-      throw new Error()
+
+      jobOffers = await JobOffersModel.find({
+        $or: [{ status: 'published' }, { status: 'rePublished' }]
+      })
+
+      return {
+        availableJobOffers   : jobOffers,
+        completedJobOffers   : [],
+        inEvaluationJobOffers: []
+      }
     } catch (error) {
       console.error(error)
       throw new Error(EFJ.problemGettingAllForEvaluator)
