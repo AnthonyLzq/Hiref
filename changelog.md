@@ -6,7 +6,7 @@
   - Endpoint to get all supervisors (firebase).
 - Pending:
   - To return the name of the company from firebase.
-  - To create two endpoints:
+  - To create one endpoint:
     - Get all supervisors per project (firebase).
 
 ## Version 0.13.0
