@@ -255,7 +255,7 @@ There are sixteen endpoints implemented:
 
     - If you send the request with a query like this `?status=`, then a payload is no longer need it, and you will get the same response shown [here](#one-task-response), but with the status updated.
 
-7.  Delete a task by id: `/task/:idTask`, it has a delete method, if you send it, then you will delete the task. You will get the same response shown [here](#one-task-response).
+7.  Delete a task by id: `/tasks/delete/:idTask`, it has a delete method, if you send it, then you will delete the task. You will get the same response shown [here](#one-task-response).
 
 8.  Get all jobs: `/jobs/`, it has a get method. This method will return you all the jobs in the database. The response will be as follows:
 
