@@ -1,5 +1,10 @@
 # Hiref
 
+## Version 1.0.0
+
+- Implemented:
+  - The company name now is a field of the job offer and must be provided to store it.
+
 ## Version 0.15.4
 
 - Fixed:
