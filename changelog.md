@@ -1,5 +1,12 @@
 # Hiref
 
+## Version 0.15.1
+
+- Fixed:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+- Pending:
+  - To return the name of the company from firebase.
+
 ## Version 0.15.0
 
 - Implemented:
