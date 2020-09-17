@@ -1,5 +1,15 @@
 # Hiref
 
+## Version 0.13.0
+
+- Implemented:
+  - `/projects/getById/:idProject/` endpoint to get the detail from a specific project.
+- Pending:
+  - To return the name of the company from firebase.
+  - To create two endpoints:
+    - Get all supervisors (firebase).
+    - Get all supervisors per project (firebase).
+
 ## Version 0.12.2
 
 - Fixed:

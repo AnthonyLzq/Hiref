@@ -34,8 +34,10 @@ enum ErrorMessagesForProjectsController {
   missingSupervisor = 'Supervisor(s) must be provided.',
   problemGettingAllByCompany = 'There was a problem getting all the projects from the requested company.',
   problemGettingAllByStatus = 'There was a problem getting all the projects from the requested company int he requested status.',
+  problemGettingOneById = 'There was a problem getting the requested project.',
   problemStoringProjects = 'There was a problem trying to store the project.',
   problemUpdatingProjects = 'There was a problem trying to update the project.',
+  projectDoesNoExists = 'The requested project does not exist.'
 }
 
 enum ErrorMessagesForTasksController {

@@ -50,6 +50,19 @@ Projects.route('/projects/:idCompany/')
     }
   })
 
+Projects.route('/projects/getById/:idProject/')
+  .get(async (req: Request, res: Response): Promise<void> => {
+    const { params: { idProject } } = req
+    const pc = new ProjectsC({ id: idProject as string } as DtoProjects)
+
+    try {
+      const result = await pc.process('getOneById')
+      response(false, { result }, res, 200)
+    } catch (error) {
+      response(true, error.message, res, 500)
+    }
+  })
+
 Projects.route('/projects/update/:idProject/')
   .patch(async (req: Request, res: Response): Promise<void> => {
     const { body: { args }, params: { idProject }, query } = req
