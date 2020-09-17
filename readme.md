@@ -66,7 +66,6 @@ There are sixteen endpoints implemented:
                "content": "Project content",
                "title": "Project title"
              },
-             "idCompany": "Company id",
              "status": "Project status",
              "supervisors": [
                "Supervisor_1 Firebase id",
@@ -89,7 +88,6 @@ There are sixteen endpoints implemented:
            "content": "Project description",
            "title": "Project name"
          },
-         "idCompany": "Company id",
          "supervisors": ["Supervisor_1 Firebase id", "Supervisor_2 Firebase id"]
        }
      }
