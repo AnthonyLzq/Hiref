@@ -1,5 +1,20 @@
 # Hiref
 
+## Version 0.15.4
+
+- Fixed:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+  - `/jobOffers/getAll/forAspirant/` and `/jobOffers/getAll/forEvaluator/` endpoints, now they can handle empty arrays and returns properly what they should.
+- Pending:
+  - To return the name of the company from firebase.
+
+## Version 0.15.3
+
+- Fixed:
+  - Endpoint to delete tasks.
+- Pending:
+  - To return the name of the company from firebase.
+
 ## Version 0.15.2
 
 - Fixed:

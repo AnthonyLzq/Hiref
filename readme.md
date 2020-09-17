@@ -255,7 +255,7 @@ There are sixteen endpoints implemented:
 
     - If you send the request with a query like this `?status=`, then a payload is no longer need it, and you will get the same response shown [here](#one-task-response), but with the status updated.
 
-7.  Delete a task by id: `/task/:idTask`, it has a delete method, if you send it, then you will delete the task. You will get the same response shown [here](#one-task-response).
+7.  Delete a task by id: `/tasks/delete/:idTask`, it has a delete method, if you send it, then you will delete the task. You will get the same response shown [here](#one-task-response).
 
 8.  Get all jobs: `/jobs/`, it has a get method. This method will return you all the jobs in the database. The response will be as follows:
 
@@ -410,14 +410,8 @@ There are sixteen endpoints implemented:
     ```json
     {
       "args": {
-        "acceptedJobOffers": [
-          "Job offer id accepted 1",
-          "Job offer id accepted 2"
-        ],
-        "rejectedJobOffers": [
-          "Job offer id rejected 1",
-          "Job offer id rejected 2"
-        ],
+        "accepted": ["Job offer id accepted 1", "Job offer id accepted 2"],
+        "rejected": ["Job offer id rejected 1", "Job offer id rejected 2"],
         "occupations": ["Occupation 1", "Occupation 2"]
       }
     }
@@ -498,7 +492,6 @@ There are sixteen endpoints implemented:
             {
               "_id": "Mongo job offer id",
               "createdAt": "Iso date",
-
               "code": "Company code of the rejected job offer.",
               "deadline": "Iso date",
               "description": {
@@ -536,11 +529,8 @@ There are sixteen endpoints implemented:
     ```json
     {
       "args": {
-        "completedJobOffers": [
-          "Job offer id completed 1",
-          "Job offer id completed 2"
-        ],
-        "inEvaluationJobOffers": [
+        "completed": ["Job offer id completed 1", "Job offer id completed 2"],
+        "inEvaluation": [
           "Job offer id in evaluation 1",
           "Job offer id in evaluation 2"
         ]
