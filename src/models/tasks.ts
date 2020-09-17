@@ -10,6 +10,11 @@ interface ITasks extends ICommonDataForProjectsTasksAndJobOffers {
 }
 
 const TasksSchemaToExtend = new Schema({
+  code: {
+    required: false,
+    type    : String,
+    unique  : true
+  },
   idProject: {
     ref     : 'projects',
     required: true,

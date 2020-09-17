@@ -120,41 +120,102 @@ class JobOffers {
     rejectedJobOffers : IJobOffers[]
   }> {
     const { accepted, occupations, rejected } = this._args as DtoJobOffers
-    const acceptedIds = (accepted as string[]).map(
-      (id: string) => new Types.ObjectId(id)
-    )
-    const rejectedIds = (rejected as string[]).map(
-      (id: string) => new Types.ObjectId(id)
-    )
-    const acceptedAndRejectedIds = [...acceptedIds, ...rejectedIds]
+    /*
+     * jobOffers:
+     * - 0: Available job offers, not accepted nor rejected.
+     * - 1: Accepted job offers.
+     * - 2: Rejected job offers.
+     */
     try {
-      /*
-       * jobOffers:
-       * - 0: Available job offers, not accepted nor rejected.
-       * - 1: Accepted job offers.
-       * - 2: Rejected job offers.
-       */
-      const jobOffers = await Promise.all([
-        JobOffersModel.find({
-          _id        : { $nin: acceptedAndRejectedIds },
-          occupations: { $in: occupations as string[] }
-        }),
-        JobOffersModel.find({
-          _id        : { $in: acceptedIds },
-          occupations: { $in: occupations as string[] }
-        }),
-        JobOffersModel.find({
-          _id        : { $in: rejectedIds },
-          occupations: { $in: occupations as string[] }
-        })
-      ])
+      if (!occupations) throw new Error(EFJ.missingOccupations)
+      let jobOffers: IJobOffers[][]
 
-      return {
-        acceptedJobOffers : jobOffers[1],
-        availableJobOffers: jobOffers[0],
-        rejectedJobOffers : jobOffers[2]
+      if (
+        (accepted as string[]).length > 0 &&
+        (rejected as string[]).length > 0 &&
+        (occupations as string[]).length > 0
+      ) {
+        const acceptedIds = (accepted as string[]).map(
+          (id: string) => new Types.ObjectId(id)
+        )
+        const rejectedIds = (rejected as string[]).map(
+          (id: string) => new Types.ObjectId(id)
+        )
+        const acceptedAndRejectedIds = [...acceptedIds, ...rejectedIds]
+
+        jobOffers = await Promise.all([
+          JobOffersModel.find({
+            _id        : { $nin: acceptedAndRejectedIds },
+            occupations: { $in: occupations as string[] }
+          }),
+          JobOffersModel.find({
+            _id        : { $in: acceptedIds },
+            occupations: { $in: occupations as string[] }
+          }),
+          JobOffersModel.find({
+            _id        : { $in: rejectedIds },
+            occupations: { $in: occupations as string[] }
+          })
+        ])
+
+        return {
+          acceptedJobOffers : jobOffers[1],
+          availableJobOffers: jobOffers[0],
+          rejectedJobOffers : jobOffers[2]
+        }
       }
+      if (
+        (accepted as string[]).length > 0 &&
+        (occupations as string[]).length > 0
+      ) {
+        const acceptedIds = (accepted as string[]).map(
+          (id: string) => new Types.ObjectId(id)
+        )
+        jobOffers = await Promise.all([
+          JobOffersModel.find({
+            _id        : { $nin: acceptedIds },
+            occupations: { $in: occupations as string[] }
+          }),
+          JobOffersModel.find({
+            _id        : { $in: acceptedIds },
+            occupations: { $in: occupations as string[] }
+          })
+        ])
+
+        return {
+          acceptedJobOffers : jobOffers[1],
+          availableJobOffers: jobOffers[0],
+          rejectedJobOffers : []
+        }
+      }
+      if (
+        (rejected as string[]).length > 0 &&
+        (occupations as string[]).length > 0
+      ) {
+        const rejectedIds = (accepted as string[]).map(
+          (id: string) => new Types.ObjectId(id)
+        )
+        jobOffers = await Promise.all([
+          JobOffersModel.find({
+            _id        : { $nin: rejectedIds },
+            occupations: { $in: occupations as string[] }
+          }),
+          JobOffersModel.find({
+            _id        : { $in: rejectedIds },
+            occupations: { $in: occupations as string[] }
+          })
+        ])
+
+        return {
+          acceptedJobOffers : [],
+          availableJobOffers: jobOffers[0],
+          rejectedJobOffers : jobOffers[1]
+        }
+      }
+      throw new Error(EFJ.missingOccupations)
     } catch (error) {
+      if (error.message === EFJ.missingOccupations) throw error
+
       console.error(error)
       throw new Error(EFJ.problemGettingAllForAspirant)
     }
@@ -166,31 +227,68 @@ class JobOffers {
     inEvaluationJobOffers: IJobOffers[]
   }> {
     const { completed, inEvaluation } = this._args as DtoJobOffers
-    const completedIds = (completed as string[]).map(
-      (id: string) => new Types.ObjectId(id)
-    )
-    const inEvaluationIds = (inEvaluation as string[]).map(
-      (id: string) => new Types.ObjectId(id)
-    )
-    const completedAndInEvaluationIds = [...completedIds, ...inEvaluationIds]
+    /*
+    * jobOffers:
+    * - 0: Available job offers, not in evaluation nor completed.
+    * - 1: Completed job offers.
+    * - 2: In evaluation job offers.
+    */
     try {
-      /*
-       * jobOffers:
-       * - 0: Available job offers, not in evaluation nor completed.
-       * - 1: In evaluation job offers.
-       * - 2: Completed job offers.
-       */
-      const jobOffers = await Promise.all([
-        JobOffersModel.find({ _id: { $in: completedAndInEvaluationIds } }),
-        JobOffersModel.find({ _id: { $in: inEvaluation } }),
-        JobOffersModel.find({ _id: { $in: completedIds } })
-      ])
+      let jobOffers: IJobOffers[][]
+      if (
+        (completed as string[]).length > 0 &&
+        (inEvaluation as string[]).length > 0
+      ) {
+        const completedIds = (completed as string[]).map(
+          (id: string) => new Types.ObjectId(id)
+        )
+        const inEvaluationIds = (inEvaluation as string[]).map(
+          (id: string) => new Types.ObjectId(id)
+        )
+        const completedAndInEvaluationIds = [...completedIds, ...inEvaluationIds]
+        jobOffers = await Promise.all([
+          JobOffersModel.find({ _id: { $in: completedAndInEvaluationIds } }),
+          JobOffersModel.find({ _id: { $in: completedIds } }),
+          JobOffersModel.find({ _id: { $in: inEvaluationIds } })
+        ])
 
-      return {
-        availableJobOffers   : jobOffers[0],
-        completedJobOffers   : jobOffers[2],
-        inEvaluationJobOffers: jobOffers[1]
+        return {
+          availableJobOffers   : jobOffers[0],
+          completedJobOffers   : jobOffers[1],
+          inEvaluationJobOffers: jobOffers[2]
+        }
       }
+      if ((completed as string[]).length > 0) {
+        const completedIds = (completed as string[]).map(
+          (id: string) => new Types.ObjectId(id)
+        )
+        jobOffers = await Promise.all([
+          JobOffersModel.find({ _id: { $nin: completedIds } }),
+          JobOffersModel.find({ _id: { $in: completedIds } })
+        ])
+
+        return {
+          availableJobOffers   : jobOffers[0],
+          completedJobOffers   : jobOffers[1],
+          inEvaluationJobOffers: []
+        }
+      }
+      if ((inEvaluation as string[]).length > 0) {
+        const inEvaluationIds = (inEvaluation as string[]).map(
+          (id: string) => new Types.ObjectId(id)
+        )
+        jobOffers = await Promise.all([
+          JobOffersModel.find({ _id: { $nin: inEvaluationIds } }),
+          JobOffersModel.find({ _id: { $in: inEvaluationIds } })
+        ])
+
+        return {
+          availableJobOffers   : jobOffers[0],
+          completedJobOffers   : [],
+          inEvaluationJobOffers: jobOffers[1]
+        }
+      }
+      throw new Error()
     } catch (error) {
       console.error(error)
       throw new Error(EFJ.problemGettingAllForEvaluator)

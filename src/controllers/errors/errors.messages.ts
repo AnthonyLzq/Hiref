@@ -18,6 +18,7 @@ enum ErrorMessagesForJobsController {
 
 enum ErrorMessagesForJobOffersController {
   missingApplicants = 'Applicants must be provided.',
+  missingCompletedOrInEvaluationArray = 'Completed or in evaluation array are missing.',
   missingOccupations = 'Occupations must be provided.',
   missingRoles = 'Roles must be provided.',
   problemAllowingTheUserPostulate = 'There was a problem trying to allow the postulation.',

@@ -12,6 +12,19 @@ MYSQL_HOST =
 MYSQL_PASS =
 MYSQL_USER =
 PORT =
+GOOGLE_APPLICATION_CREDENTIALS =
+FIREBASE_AUTH_PROVIDER_X509_CERT_URL =
+FIREBASE_AUTH_URI =
+FIREBASE_CLIENT_EMAIL =
+FIREBASE_CLIENT_ID =
+FIREBASE_TYPE =
+FIREBASE_PRIVATE_KEY_ID =
+FIREBASE_PRIVATE_KEY =
+FIREBASE_PROJECT_ID =
+FIREBASE_TOKEN_URI =
+FIREBASE_URL =
+FIREBASE_X509_CERT_URL =
+
 ```
 
 ## Setup
@@ -158,7 +171,7 @@ There are sixteen endpoints implemented:
 
     - If you send the request with a query like this `?status=`, then payload is no longer need it, and the response the same that was shown [here](#one-project-response), but with the status updated. Remember that there are only three status allowed as it is shown [here](#status).
 
-5.  Tasks from a project: `/task/:idProject/`, it has a get and a post method. Here are some examples:
+5.  Tasks from a project: `/tasks/:idProject/`, it has a get and a post method. Here are some examples:
 
     - If you send a get request, then you will get all the tasks from the request project from the requested company. <a id="tasks-response"></a>The response will be as follows:
 
@@ -204,7 +217,7 @@ There are sixteen endpoints implemented:
             "Responsible_2 Firebase id"
           ],
           "status": "Task status",
-          "subTask": ["Sub task 1", "Sub task 2"]
+          "subTasks": ["Sub task 1", "Sub task 2"]
         }
       }
       ```
