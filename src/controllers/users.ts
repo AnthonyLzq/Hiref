@@ -4,9 +4,13 @@ declare const global: CustomNodeJSGlobal
 
 class Users {
   private _args: Record<string, unknown>[]
+  private _usersRef: FirebaseFirestore.CollectionReference<
+    FirebaseFirestore.DocumentData
+  >
 
   constructor () {
     this._args = []
+    this._usersRef = global.firestoreDatabase.collection('users')
   }
 
   public process (
@@ -15,16 +19,23 @@ class Users {
     switch (type) {
       case 'getAllClients':
         return this._getAllClients()
+      case 'getAllSupervisors':
+        return this._getAllSupervisors()
       default:
         return undefined
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private async _getAllClients (): Promise<Record<string, unknown>[]> {
-    const usersRef = global.firestoreDatabase.collection('users')
+    const result = await this._usersRef.where('role', '==', 'client').get()
 
-    const result = await usersRef.where('role', '==', 'client').get()
+    result.docs.map(doc => this._args.push({ id: doc.id, ...doc.data() }))
+
+    return this._args
+  }
+
+  private async _getAllSupervisors (): Promise<Record<string, unknown>[]> {
+    const result = await this._usersRef.where('role', '==', 'supervisor').get()
 
     result.docs.map(doc => this._args.push({ id: doc.id, ...doc.data() }))
 

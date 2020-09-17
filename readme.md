@@ -43,268 +43,271 @@ Mongo connection established.
 
 There are sixteen endpoints implemented:
 
-1. Home: `/`, it has a get method. It is only decorative.
-2. Projects by company: `/projects/:idCompany/`, it has a get and a post method. Here are some examples:
+1.  Home: `/`, it has a get method. It is only decorative.
+2.  Projects by company: `/projects/:idCompany/`, it has a get and a post method. Here are some examples:
 
-   - You can send a get request with a query parameter or without it, if you send a get request without any query, then you will get all the projects that belongs to the requested company.
+    - You can send a get request with a query parameter or without it, if you send a get request without any query, then you will get all the projects that belongs to the requested company.
 
-   - If you sen a get request with a query like this: `?status=`, then you will get all the projects that belong to the requested company and has the requested status, there are three status allowed: <a id="status"></a>active, completed and canceled. If you ask for another status, you will get an [error](#error).
+    - If you sen a get request with a query like this: `?status=`, then you will get all the projects that belong to the requested company and has the requested status, there are three status allowed: <a id="status"></a>active, completed and canceled. If you ask for another status, you will get an [error](#error).
 
-   - In both cases you will get a response like follows, which contains an array of the projects that were found:
+    - In both cases you will get a response like follows, which contains an array of the projects that were found:
 
-     ```json
-     {
-       "error": false,
-       "message": {
-         "result": [
-           {
-             "_id": "Project MongoDB id",
-             "createdAt": "Iso date",
-             "code": "Project id for the company",
-             "createdAt": "Iso date",
-             "deadline": "Iso date",
-             "description": {
-               "content": "Project content",
-               "title": "Project title"
-             },
-             "status": "Project status",
-             "supervisors": [
-               "Supervisor_1 Firebase id",
-               "Supervisor_2 Firebase id"
-             ],
-             "updatedAt": "Iso date"
-           }
-         ]
-       }
-     }
-     ```
+      ```json
+      {
+        "error": false,
+        "message": {
+          "result": [
+            {
+              "_id": "Project MongoDB id",
+              "createdAt": "Iso date",
+              "code": "Project id for the company",
+              "createdAt": "Iso date",
+              "deadline": "Iso date",
+              "description": {
+                "content": "Project content",
+                "title": "Project title"
+              },
+              "status": "Project status",
+              "supervisors": [
+                "Supervisor_1 Firebase id",
+                "Supervisor_2 Firebase id"
+              ],
+              "updatedAt": "Iso date"
+            }
+          ]
+        }
+      }
+      ```
 
-   - If you send a post request, a new project that belongs to the requested company will be stored in the database. You need a <a id="project-payload"></a> payload as follows or you will get an [error](#error):
+    - If you send a post request, a new project that belongs to the requested company will be stored in the database. You need a <a id="project-payload"></a> payload as follows or you will get an [error](#error):
 
-     ```json
-     {
-       "args": {
-         "code": "Company code for the project",
-         "deadline": "YEAR-MONTH-DAY",
-         "description": {
-           "content": "Project description",
-           "title": "Project name"
-         },
-         "supervisors": ["Supervisor_1 Firebase id", "Supervisor_2 Firebase id"]
-       }
-     }
-     ```
+      ```json
+      {
+        "args": {
+          "code": "Company code for the project",
+          "deadline": "YEAR-MONTH-DAY",
+          "description": {
+            "content": "Project description",
+            "title": "Project name"
+          },
+          "supervisors": [
+            "Supervisor_1 Firebase id",
+            "Supervisor_2 Firebase id"
+          ]
+        }
+      }
+      ```
 
-     It will store the project with active status as default. It can't be changed unless an update or update status is performed.</br>
-     <a id="one-project-response"></a> You will get a response which contains the project that has been stored:
+      It will store the project with active status as default. It can't be changed unless an update or update status is performed.</br>
+      <a id="one-project-response"></a> You will get a response which contains the project that has been stored:
 
-     ```json
-     {
-       "error": false,
-       "message": {
-         "result": {
-           "_id": "Project MongoDB id",
-           "createdAt": "Iso date",
-           "code": "Company code for the project",
-           "deadline": "Iso date",
-           "description": {
-             "content": "Project description",
-             "title": "Project name"
-           },
-           "idCompany": "Company id",
-           "supervisors": [
-             "Supervisor_1 Firebase id",
-             "Supervisor_2 Firebase id"
-           ],
-           "updatedAt": "Iso date"
-         }
-       }
-     }
-     ```
+      ```json
+      {
+        "error": false,
+        "message": {
+          "result": {
+            "_id": "Project MongoDB id",
+            "createdAt": "Iso date",
+            "code": "Company code for the project",
+            "deadline": "Iso date",
+            "description": {
+              "content": "Project description",
+              "title": "Project name"
+            },
+            "idCompany": "Company id",
+            "supervisors": [
+              "Supervisor_1 Firebase id",
+              "Supervisor_2 Firebase id"
+            ],
+            "updatedAt": "Iso date"
+          }
+        }
+      }
+      ```
 
-3. Get project by id: `/projects/getById/:idProject/`, is has a get method. This will return the project that has the requested id. The response will be as follows:
+3.  Get project by id: `/projects/getById/:idProject/`, is has a get method. This will return the project that has the requested id. The response will be as follows:
 
-   ```json
-   {
-     "error": false,
-     "message": {
-       "result": {
-         "_id": "Project MongoDB id",
-         "createdAt": "Iso date",
-         "code": "Company code for the project",
-         "deadline": "Iso date",
-         "description": {
-           "content": "Project description",
-           "title": "Project name"
-         },
-         "idCompany": "Company id",
-         "supervisors": [
-           "Supervisor_1 Firebase id",
-           "Supervisor_2 Firebase id"
-         ],
-         "updatedAt": "Iso date"
-       }
-     }
-   }
-   ```
+    ```json
+    {
+      "error": false,
+      "message": {
+        "result": {
+          "_id": "Project MongoDB id",
+          "createdAt": "Iso date",
+          "code": "Company code for the project",
+          "deadline": "Iso date",
+          "description": {
+            "content": "Project description",
+            "title": "Project name"
+          },
+          "idCompany": "Company id",
+          "supervisors": [
+            "Supervisor_1 Firebase id",
+            "Supervisor_2 Firebase id"
+          ],
+          "updatedAt": "Iso date"
+        }
+      }
+    }
+    ```
 
-4. Update project: `/projects/update/:idProject/`, it has a patch method. Here are some examples:
+4.  Update project: `/projects/update/:idProject/`, it has a patch method. Here are some examples:
 
-   - You can send a patch request with a query or without it, if you send the request without the query, then you have to send the same payload shown [here](#project-payload), adding the field `status` in the "args", but with the updated information.</br>
-     It will return you the same response shown [here](#one-project-response), but with the project that has been updated.
+    - You can send a patch request with a query or without it, if you send the request without the query, then you have to send the same payload shown [here](#project-payload), adding the field `status` in the "args", but with the updated information.</br>
+      It will return you the same response shown [here](#one-project-response), but with the project that has been updated.
 
-   - If you send the request with a query like this `?status=`, then payload is no longer need it, and the response the same that was shown [here](#one-project-response), but with the status updated. Remember that there are only three status allowed as it is shown [here](#status).
+    - If you send the request with a query like this `?status=`, then payload is no longer need it, and the response the same that was shown [here](#one-project-response), but with the status updated. Remember that there are only three status allowed as it is shown [here](#status).
 
-5. Tasks from a project: `/task/:idProject/`, it has a get and a post method. Here are some examples:
+5.  Tasks from a project: `/task/:idProject/`, it has a get and a post method. Here are some examples:
 
-   - If you send a get request, then you will get all the tasks from the request project from the requested company. <a id="tasks-response"></a>The response will be as follows:
+    - If you send a get request, then you will get all the tasks from the request project from the requested company. <a id="tasks-response"></a>The response will be as follows:
 
-     ```json
-     {
-       "error": false,
-       "message": {
-         "result": [
-           {
-             "_id": "Task MongoDB id",
-             "createdAt": "Iso date",
-             "deadline": "Iso date",
-             "description": {
-               "content": "Task content",
-               "title": "Task description"
-             },
-             "idProject": "Project MongoDB id",
-             "responsible": [
-               "Responsible_1 Firebase id",
-               "Responsible_2 Firebase id"
-             ],
-             "status": "Task status",
-             "subTasks": ["Sub task 1", "Sub task 2"],
-             "updatedAt": "Iso date"
-           }
-         ]
-       }
-     }
-     ```
+      ```json
+      {
+        "error": false,
+        "message": {
+          "result": [
+            {
+              "_id": "Task MongoDB id",
+              "createdAt": "Iso date",
+              "deadline": "Iso date",
+              "description": {
+                "content": "Task content",
+                "title": "Task description"
+              },
+              "idProject": "Project MongoDB id",
+              "responsible": [
+                "Responsible_1 Firebase id",
+                "Responsible_2 Firebase id"
+              ],
+              "status": "Task status",
+              "subTasks": ["Sub task 1", "Sub task 2"],
+              "updatedAt": "Iso date"
+            }
+          ]
+        }
+      }
+      ```
 
-   - If you send a post request, then you will store a new task from the request project from the requested company. You need a <a id="task-payload"></a> payload as follows or you will get an [error](#error):
+    - If you send a post request, then you will store a new task from the request project from the requested company. You need a <a id="task-payload"></a> payload as follows or you will get an [error](#error):
 
-     ```json
-     {
-       "args": {
-         "deadline": "YEAR-MONTH-DAY",
-         "description": {
-           "title": "Task title",
-           "content": "Task content"
-         },
-         "responsible": [
-           "Responsible_1 Firebase id",
-           "Responsible_2 Firebase id"
-         ],
-         "status": "Task status",
-         "subTask": ["Sub task 1", "Sub task 2"]
-       }
-     }
-     ```
+      ```json
+      {
+        "args": {
+          "deadline": "YEAR-MONTH-DAY",
+          "description": {
+            "title": "Task title",
+            "content": "Task content"
+          },
+          "responsible": [
+            "Responsible_1 Firebase id",
+            "Responsible_2 Firebase id"
+          ],
+          "status": "Task status",
+          "subTask": ["Sub task 1", "Sub task 2"]
+        }
+      }
+      ```
 
-     Sub tasks field is optional, in case there isn't any sub task, you should send an empty array. <a id="one-task-response"></a>The response will be as follows:
+      Sub tasks field is optional, in case there isn't any sub task, you should send an empty array. <a id="one-task-response"></a>The response will be as follows:
 
-     ```json
-     {
-       "error": false,
-       "message": {
-         "result": {
-           "_id": "Task MongoDB id",
-           "createdAt": "Iso date",
-           "deadline": "Iso date",
-           "description": {
-             "content": "Task content",
-             "title": "Task description"
-           },
-           "idProject": "Project MongoDB id",
-           "responsible": [
-             "Responsible_1 Firebase id",
-             "Responsible_2 Firebase id"
-           ],
-           "status": "Task status",
-           "subTasks": ["Sub task 1", "Sub task 2"],
-           "updatedAt": "Iso date"
-         }
-       }
-     }
-     ```
+      ```json
+      {
+        "error": false,
+        "message": {
+          "result": {
+            "_id": "Task MongoDB id",
+            "createdAt": "Iso date",
+            "deadline": "Iso date",
+            "description": {
+              "content": "Task content",
+              "title": "Task description"
+            },
+            "idProject": "Project MongoDB id",
+            "responsible": [
+              "Responsible_1 Firebase id",
+              "Responsible_2 Firebase id"
+            ],
+            "status": "Task status",
+            "subTasks": ["Sub task 1", "Sub task 2"],
+            "updatedAt": "Iso date"
+          }
+        }
+      }
+      ```
 
-6. Update a task from a project: `/tasks/:idProject/:idTask/`, it has a patch method. Here are some examples:
+6.  Update a task from a project: `/tasks/:idProject/:idTask/`, it has a patch method. Here are some examples:
 
-   - You can send a patch request with query or without it, if you send the request without it, then you need to send the same payload shown [here](#task-payload). Sub tasks field is optional, in case there isn't any sub task, you should send an empty array. The response will be the same shown [here](#one-task-response).
+    - You can send a patch request with query or without it, if you send the request without it, then you need to send the same payload shown [here](#task-payload). Sub tasks field is optional, in case there isn't any sub task, you should send an empty array. The response will be the same shown [here](#one-task-response).
 
-   - If you send the request with a query like this `?status=`, then a payload is no longer need it, and you will get the same response shown [here](#one-task-response), but with the status updated.
+    - If you send the request with a query like this `?status=`, then a payload is no longer need it, and you will get the same response shown [here](#one-task-response), but with the status updated.
 
-7. Delete a task by id: `/task/:idTask`, it has a delete method, if you send it, then you will delete the task. You will get the same response shown [here](#one-task-response).
+7.  Delete a task by id: `/task/:idTask`, it has a delete method, if you send it, then you will delete the task. You will get the same response shown [here](#one-task-response).
 
-8. Get all jobs: `/jobs/`, it has a get method. This method will return you all the jobs in the database. The response will be as follows:
+8.  Get all jobs: `/jobs/`, it has a get method. This method will return you all the jobs in the database. The response will be as follows:
 
-   ```json
-   {
-     "error": false,
-     "message": {
-       "result": [
-         {
-           "jobFamily": {
-             "id": 1,
-             "jobFamilyName": "Business and Financial Operations"
-           },
-           "occupations": [
-             {
-               "occupationId": "13-1011.00",
-               "occupationName": "Agents and Business Managers of Artists, Performers, and Athletes"
-             }
-           ]
-         }
-       ]
-     }
-   }
-   ```
+    ```json
+    {
+      "error": false,
+      "message": {
+        "result": [
+          {
+            "jobFamily": {
+              "id": 1,
+              "jobFamilyName": "Business and Financial Operations"
+            },
+            "occupations": [
+              {
+                "occupationId": "13-1011.00",
+                "occupationName": "Agents and Business Managers of Artists, Performers, and Athletes"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    ```
 
-9. Get all the job offers: `/jobOffers/`, it has a get method. This method will return all the job offers stored in the database. <a id="jobOffers-response"></a>The response will be as follows:
+9.  Get all the job offers: `/jobOffers/`, it has a get method. This method will return all the job offers stored in the database. <a id="jobOffers-response"></a>The response will be as follows:
 
-   ```json
-   {
-     "error": false,
-     "message": {
-       "result": [
-         {
-           "_id": "Mongo job offer id",
-           "createdAt": "Iso date",
-           "code": "Company code for the job offer.",
-           "deadline": "Iso date",
-           "description": {
-             "content": "Job offer content.",
-             "title": "Job offer title"
-           },
-           "idProject": "Project MongoDB id",
-           "numberApplicants": 2,
-           "occupations": ["Ocupation 1", "Ocupation 2"],
-           "roles": [
-             {
-               "applicants": [
-                 "Aspirant 1 Firebase id",
-                 "Aspirant 2 Firebase id"
-               ],
-               "description": {
-                 "content": "Role content",
-                 "title": "Role title"
-               },
-               "quantity": 12,
-               "remuneration": 930
-             }
-           ],
-           "status": "Job offer status.",
-           "updatedAt": "Iso date"
-         }
-       ]
-     }
-   }
-   ```
+    ```json
+    {
+      "error": false,
+      "message": {
+        "result": [
+          {
+            "_id": "Mongo job offer id",
+            "createdAt": "Iso date",
+            "code": "Company code for the job offer.",
+            "deadline": "Iso date",
+            "description": {
+              "content": "Job offer content.",
+              "title": "Job offer title"
+            },
+            "idProject": "Project MongoDB id",
+            "numberApplicants": 2,
+            "occupations": ["Ocupation 1", "Ocupation 2"],
+            "roles": [
+              {
+                "applicants": [
+                  "Aspirant 1 Firebase id",
+                  "Aspirant 2 Firebase id"
+                ],
+                "description": {
+                  "content": "Role content",
+                  "title": "Role title"
+                },
+                "quantity": 12,
+                "remuneration": 930
+              }
+            ],
+            "status": "Job offer status.",
+            "updatedAt": "Iso date"
+          }
+        ]
+      }
+    }
+    ```
 
 10. Store a job offer for a project: `/jobOffers/store/:idProject/`, it has a post method. It will store a job offer for a determined project. <a id="jobOffer-payload"></a>You need a payload as follows or you will get an [error](#error):
 
@@ -664,6 +667,7 @@ There are sixteen endpoints implemented:
 18. Get all the users: `/users/`, it has a get method. You have to send the request with a query like this `?type=`, if you don't send the request with a query, you will an [error](#error).
 
     - `?type=clients`: it will give you all the clients stored in firebase, you will get a response as follows:
+
       ```json
       {
         "error": false,
@@ -676,6 +680,27 @@ There are sixteen endpoints implemented:
               "ruc": "12345678",
               "business_name": "Client business name 2",
               "email": "client2@test.com"
+            }
+          ]
+        }
+      }
+      ```
+
+    - `?type=supervisor`: it will give you all the supervisors stored in firebase, you will get a response as follows:
+
+      ```json
+      {
+        "error": false,
+        "message": {
+          "result": [
+            {
+              "id": "JELZzgqtj2MmGJGl5Ty3tGZTVny1",
+              "dni": "12345678",
+              "role": "supervisor",
+              "names": "Supervisor",
+              "email": "supervisor1@test.com",
+              "lastNames": "1",
+              "password": "asdasd"
             }
           ]
         }
