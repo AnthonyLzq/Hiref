@@ -15,6 +15,7 @@ interface IRoles {
 interface DtoJobOffers {
   accepted?        : string[]
   code?            : string
+  commercialName?  : string
   completed?       : string[]
   deadline?        : Date
   description?     : IInformation

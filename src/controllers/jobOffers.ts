@@ -353,6 +353,7 @@ class JobOffers {
   private async _store (): Promise<IJobOffers | null> {
     const {
       code,
+      commercialName,
       deadline,
       description,
       idProject,
@@ -362,6 +363,7 @@ class JobOffers {
 
     try {
       if (!code) throw new Error(GEM.missingCode)
+      if (!commercialName) throw new Error(EFJ.missingCommercialName)
       else if (!deadline) throw new Error(GEM.missingDeadline)
       else if (new Date(deadline).toString() === 'Invalid Date')
         throw new Error(GEM.invalidDate)
@@ -372,6 +374,7 @@ class JobOffers {
 
       const newJobOffer = new JobOffersModel({
         code,
+        commercialName,
         deadline        : new Date(deadline),
         description,
         idProject,

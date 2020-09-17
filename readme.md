@@ -292,6 +292,7 @@ There are sixteen endpoints implemented:
             "_id": "Mongo job offer id",
             "createdAt": "Iso date",
             "code": "Company code for the job offer.",
+            "commercialName": "Company commercial name",
             "deadline": "Iso date",
             "description": {
               "content": "Job offer content.",
@@ -328,6 +329,7 @@ There are sixteen endpoints implemented:
     {
       "args": {
         "code": "Company code for the project",
+        "commercialName": "Company commercial name",
         "deadline": "YEAR-MONTH-DAY",
         "description": {
           "content": "Job offer content.",
@@ -361,6 +363,7 @@ There are sixteen endpoints implemented:
           "result": {
             "createdAt": "Iso date",
             "code": "Updated company code for the job offer.",
+            "commercialName": "Company commercial name",
             "deadline": "Iso date",
             "description": {
               "content": "Updated job offer content.",
@@ -428,8 +431,8 @@ There are sixteen endpoints implemented:
             {
               "_id": "Mongo job offer id",
               "createdAt": "Iso date",
-
               "code": "Company code of the accepted job offer.",
+              "commercialName": "Company commercial name",
               "deadline": "Iso date",
               "description": {
                 "content": "Content of the accepted job offer.",
@@ -460,8 +463,8 @@ There are sixteen endpoints implemented:
             {
               "_id": "Mongo job offer id",
               "createdAt": "Iso date",
-
               "code": "Company code of the available job offer.",
+              "commercialName": "Company commercial name",
               "deadline": "Iso date",
               "description": {
                 "content": "Content of the available job offer.",
@@ -493,6 +496,7 @@ There are sixteen endpoints implemented:
               "_id": "Mongo job offer id",
               "createdAt": "Iso date",
               "code": "Company code of the rejected job offer.",
+              "commercialName": "Company commercial name",
               "deadline": "Iso date",
               "description": {
                 "content": "Content of the rejected job offer.",
@@ -550,6 +554,7 @@ There are sixteen endpoints implemented:
               "_id": "Mongo job offer id",
               "createdAt": "Iso date",
               "code": "Company code of the available job offer.",
+              "commercialName": "Company commercial name",
               "deadline": "Iso date",
               "description": {
                 "content": "Content of the available job offer.",
@@ -581,6 +586,7 @@ There are sixteen endpoints implemented:
               "_id": "Mongo job offer id",
               "createdAt": "Iso date",
               "code": "Company code of the completed job offer.",
+              "commercialName": "Company commercial name",
               "deadline": "Iso date",
               "description": {
                 "content": "Content of the completed job offer.",
@@ -612,6 +618,7 @@ There are sixteen endpoints implemented:
               "_id": "Mongo job offer id",
               "createdAt": "Iso date",
               "code": "Company code of the inEvaluation job offer.",
+              "commercialName": "Company commercial name",
               "deadline": "Iso date",
               "description": {
                 "content": "Content of the inEvaluation job offer.",
