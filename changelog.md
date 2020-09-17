@@ -1,5 +1,12 @@
 # Hiref
 
+## Version 0.15.0
+
+- Implemented:
+  - Endpoint to get all supervisors per project (firebase).
+- Pending:
+  - To return the name of the company from firebase.
+
 ## Version 0.14.0
 
 - Implemented:

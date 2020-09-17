@@ -30,4 +30,17 @@ Users.route('/users/')
     }
   })
 
+Users.route('/users/getSupervisorsByProject/:idProject')
+  .get(async (req: Request, res: Response): Promise<void> => {
+    const { params: { idProject } } = req
+    const c = new UsersC(idProject as string)
+
+    try {
+      const result = await c.process('getSupervisorsByProject')
+      response(false, { result }, res, 200)
+    } catch (error) {
+      response(true, error.message, res, 500)
+    }
+  })
+
 export { Users }

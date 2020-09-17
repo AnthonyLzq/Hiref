@@ -707,6 +707,26 @@ There are sixteen endpoints implemented:
       }
       ```
 
+19. Get all supervisors per project: `/users/getSupervisorsByProject/:idProject/`, it has a get method. It will give you all the data from the supervisors of th requested project. You will get a response as follows:
+
+    ```json
+    {
+      "error": false,
+      "message": {
+        "result": [
+          {
+            "role": "client",
+            "commercial_name": "Client 2",
+            "business_name": "Client business name 2",
+            "email": "client2@test.com",
+            "ruc": "12345678",
+            "id": "BEkuhoLp1rPiZwco46FKaIha8PP2"
+          }
+        ]
+      }
+    }
+    ```
+
 ### Notes
 
 <a id="error"></a>In case of error you will get a generic error as follows, with a 500 error code:
