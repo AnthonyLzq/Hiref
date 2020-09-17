@@ -1,5 +1,10 @@
 # Hiref
 
+## Version 1.0.1
+
+- Fixed:
+  - Code field in the job offers.
+
 ## Version 1.0.0
 
 - Implemented:

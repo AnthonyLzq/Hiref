@@ -38,6 +38,10 @@ const Roles = new Schema(
 )
 
 const JobOffersToExtend = new Schema({
+  code: {
+    required: true,
+    type    : String
+  },
   commercialName: {
     required: true,
     type    : String
