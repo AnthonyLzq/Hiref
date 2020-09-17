@@ -4,7 +4,7 @@ import { Jobs as JobsC } from '../controllers/jobs'
 
 const Jobs = Router()
 
-Jobs.route('/jobs')
+Jobs.route('/jobs/')
   .get(async (req: Request, res: Response) => {
     const jc = new JobsC()
 
@@ -12,7 +12,7 @@ Jobs.route('/jobs')
       const result = await jc.process('getAll')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 

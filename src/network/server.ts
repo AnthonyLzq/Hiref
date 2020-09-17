@@ -1,13 +1,15 @@
 import express from 'express'
 import morgan from 'morgan'
 import { applyRoutes } from './routes'
+import { firebaseConnection } from '../database/firebase'
 import { mongoConnection } from '../database/mongo'
 import { mysqlConnection } from '../database/mysql'
 
 class Server {
-  public app: express.Application
-  private _mongoConnection: (() => Promise<void>) | undefined
-  private _mysqlConnection: (() => Promise<void>) | undefined
+  public app                 : express.Application
+  private _firebaseConnection: (() => void) |undefined
+  private _mongoConnection   : (() => void) | undefined
+  private _mysqlConnection   : (() => void) | undefined
 
   constructor () {
     this.app = express()
@@ -36,12 +38,17 @@ class Server {
     applyRoutes(this.app)
   }
 
-  private async _mongo (): Promise<void> {
+  private _firebase (): void {
+    this._firebaseConnection = firebaseConnection
+    this._firebaseConnection()
+  }
+
+  private _mongo (): void {
     this._mongoConnection = mongoConnection
     this._mongoConnection()
   }
 
-  private async _mysql (): Promise<void> {
+  private _mysql (): void {
     this._mysqlConnection = mysqlConnection
     this._mysqlConnection()
   }
@@ -52,6 +59,7 @@ class Server {
     )
 
     try {
+      this._firebase()
       this._mongo()
       this._mysql()
     } catch (error) {

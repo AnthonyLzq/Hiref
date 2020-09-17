@@ -16,7 +16,7 @@ JobOffers.route('/jobOffers/')
       const result = await joc.process('getAll')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 
@@ -32,7 +32,7 @@ JobOffers.route('/jobOffers/store/:idProject/')
       const result = await joc.process('store')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 
@@ -65,7 +65,7 @@ JobOffers.route('/jobOffers/update/:idJobOffer/')
         result = await joc.process('update')
         response(false, { result }, res, 200)
       } catch (error) {
-        response(true, { message: error.message }, res, 500)
+        response(true, error.message, res, 500)
       }
     } else {
       const { status } = query
@@ -78,7 +78,7 @@ JobOffers.route('/jobOffers/update/:idJobOffer/')
         result = await joc.process('updateStatus')
         response(false, { result }, res, 200)
       } catch (error) {
-        response(true, { message: error.message }, res, 500)
+        response(true, error.message, res, 500)
       }
     }
   })
@@ -94,7 +94,7 @@ JobOffers.route('/jobOffers/getAll/byProject/:idProject/')
       const result = await joc.process('getAllByProject')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 
@@ -107,7 +107,7 @@ JobOffers.route('/jobOffers/getAll/byOccupations/')
       const result = await joc.process('getAllByOccupations')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 
@@ -120,7 +120,7 @@ JobOffers.route('/jobOffers/getAll/forAspirant/')
       const result = await joc.process('getAllForAspirant')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 
@@ -133,7 +133,7 @@ JobOffers.route('/jobOffers/getAll/forEvaluator/')
       const result = await joc.process('getAllForEvaluator')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 
@@ -146,7 +146,7 @@ JobOffers.route('/jobOffers/delete/:idJobOffer/')
       const result = await joc.process('deleteOne')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 
@@ -162,7 +162,7 @@ JobOffers.route('/jobOffers/postulate/:idJobOffer/')
       const result = await joc.process('postulation')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 

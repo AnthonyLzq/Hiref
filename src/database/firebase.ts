@@ -34,7 +34,7 @@ const firebaseConnection = async (): Promise<void> => {
   await deleteFile(process.env.GOOGLE_APPLICATION_CREDENTIALS as string)
 
   global.firestoreDatabase = admin.firestore(app)
-  // console.log(global.firestoreDatabase)
+  console.log('Firebase connection established.')
 }
 
 // firebaseConnection()

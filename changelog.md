@@ -1,5 +1,20 @@
 # Hiref
 
+## Version 0.12.0
+
+- Implemented:
+  - Global variable for the firestore object.
+  - Endpoint to get all the clients from firebase.
+  - `src/routes/index.ts` file to handle the routes.
+- Fixed:
+  - [Documentation](https://github.com/AnthonyLzq/Hiref#readme).
+  - Error message when a request is wrong.
+- Pending:
+  - To return the name of the company from firebase.
+  - To create two endpoints:
+    - Get all supervisors (firebase).
+    - Get all supervisors per project (firebase).
+
 ## Version 0.11.2
 
 - Fixed:

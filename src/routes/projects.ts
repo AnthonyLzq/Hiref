@@ -21,7 +21,7 @@ Projects.route('/projects/:idCompany/')
         result = await pc.process('getAllByCompany')
         response(false, { result }, res, 200)
       } catch (error) {
-        response(true, { message: error.message }, res, 500)
+        response(true, error.message, res, 500)
       }
     } else {
       const { status } = query
@@ -31,7 +31,7 @@ Projects.route('/projects/:idCompany/')
         result = await pc.process('getAllByStatus')
         response(false, { result }, res, 200)
       } catch (error) {
-        response(true, { message: error.message }, res, 500)
+        response(true, error.message, res, 500)
       }
     }
   })
@@ -46,7 +46,7 @@ Projects.route('/projects/:idCompany/')
       const result = await pc.process('store')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 
@@ -66,7 +66,7 @@ Projects.route('/projects/update/:idProject/')
         result = await pc.process('update')
         response(false, { result }, res, 200)
       } catch (error) {
-        response(true, { message: error.message }, res, 500)
+        response(true, error.message, res, 500)
       }
     } else {
       const { status } = query
@@ -79,7 +79,7 @@ Projects.route('/projects/update/:idProject/')
         result = await pc.process('updateStatus')
         response(false, { result }, res, 200)
       } catch (error) {
-        response(true, { message: error.message }, res, 500)
+        response(true, error.message, res, 500)
       }
     }
   })

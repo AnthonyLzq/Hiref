@@ -17,7 +17,7 @@ Tasks.route('/tasks/:idProject/')
       const result = await tc.process('getAll')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
   .post(async (req: Request, res: Response): Promise<void> => {
@@ -31,7 +31,7 @@ Tasks.route('/tasks/:idProject/')
       const result = await tc.process('store')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 
@@ -56,7 +56,7 @@ Tasks.route('/tasks/:idProject/:idTask/')
         result = await tc.process('update')
         response(false, { result }, res, 200)
       } catch (error) {
-        response(true, { message: error.message }, res, 500)
+        response(true, error.message, res, 500)
       }
     } else {
       const { status } = query
@@ -69,7 +69,7 @@ Tasks.route('/tasks/:idProject/:idTask/')
         result = await tc.process('updateStatus')
         response(false, { result }, res, 200)
       } catch (error) {
-        response(true, { message: error.message }, res, 500)
+        response(true, error.message, res, 500)
       }
     }
   })
@@ -83,7 +83,7 @@ Tasks.route('/task/delete/:idTask/')
       const result = await tc.process('deleteOne')
       response(false, { result }, res, 200)
     } catch (error) {
-      response(true, { message: error.message }, res, 500)
+      response(true, error.message, res, 500)
     }
   })
 

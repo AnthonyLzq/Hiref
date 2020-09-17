@@ -125,7 +125,7 @@ There are sixteen endpoints implemented:
 
    - If you send the request with a query like this `?status=`, then payload is no longer need it, and the response the same that was shown [here](#one-project-response), but with the status updated. Remember that there are only three status allowed as it is shown [here](#status).
 
-4. Tasks from a project: `/task/delete/:idProject/`, it has a get and a post method. Here are some examples:
+4. Tasks from a project: `/task/:idProject/`, it has a get and a post method. Here are some examples:
 
    - If you send a get request, then you will get all the tasks from the request project from the requested company. <a id="tasks-response"></a>The response will be as follows:
 
@@ -360,13 +360,13 @@ There are sixteen endpoints implemented:
           "Job offer id accepted 1",
           "Job offer id accepted 2"
         ],
-        "availableJobOffers": [
-          "Job offer id available 1",
-          "Job offer id available 2"
-        ],
         "rejectedJobOffers": [
           "Job offer id rejected 1",
           "Job offer id rejected 2"
+        ],
+        "occupations": [
+          "Occupation 1",
+          "Occupation 2"
         ]
       }
     }
@@ -476,10 +476,6 @@ There are sixteen endpoints implemented:
     ```json
     {
       "args": {
-        "availableJobOffers": [
-          "Job offer id available 1",
-          "Job offer id available 2"
-        ],
         "completedJobOffers": [
           "Job offer id completed 1",
           "Job offer id completed 2"
@@ -614,6 +610,27 @@ There are sixteen endpoints implemented:
     ```
 
     The response will be the same shown [here](#jobOffers-response), but with a new field called applicants.
+
+17. Get all the users: `/users/`, it has a get method. You have to send the request with a query like this `?type=`, if you don't send the request with a query, you will an [error](#error).
+
+    - `?type=clients`: it will give you all the clients stored in firebase, you will get a response as follows:
+        ```json
+        {
+          "error": false,
+          "message": {
+            "result": [
+              {
+                "id": "BEkuhoLp1rPiZwco46FKaIha8PP2",
+                "role": "client",
+                "commercial_name": "Client 2",
+                "ruc": "12345678",
+                "business_name": "Client business name 2",
+                "email": "client2@test.com"
+              }
+            ]
+          }
+        }
+        ```
 
 ### Notes
 
